@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "~flatpickr/dist/flatpickr.min.css";
+@layer components {
+    .flatpickr-calendar {
+        @apply w-full !important;
+    }
+    .flatpickr-day.today:not(.flatpickr-day.selected) {
+        @apply border-0 border-b-2 rounded-none !important;
+    }
+}
+
+@import "~swiper/swiper-bundle.css";
+
+@layer components {
+    .button.big {
+        @apply w-full px-3 py-2 font-bold text-white bg-blue-500 border border-transparent rounded-lg shadow focus:outline-none;
+    }
+
+    .button:disabled {
+        @apply text-gray-400 bg-gray-200;
+    }
+
+    .card {
+        @apply w-full p-5 bg-white border border-gray-200 rounded-lg shadow-xl;
+    }
+
+    .alert {
+        @apply w-full p-3 text-xs rounded shadow;
+    }
+
+    .alert-danger {
+        @apply bg-red-100 border-l-4 border-red-500;
+    }
+
+    .form-block {
+        @apply space-y-5;
+    }
+
+    .label {
+        @apply block text-sm text-gray-600;
+    }
+
+    .button-block {
+        @apply space-y-4 sm:space-y-0 sm:flex sm:space-x-5;
+    }
+
+    .button {
+        @apply flex justify-center w-full px-4 py-2 text-sm font-medium border border-transparent rounded-md shadow-sm shadow focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .button-primary {
+        @apply text-white bg-primary border-primary-dark hover:bg-primary-dark focus:ring-primary;
+    }
+
+    .button-light {
+        @apply text-gray-800 bg-gray-100 border-gray-200 hover:bg-gray-300 focus:ring-primary;
+    }
+
+    .text-input {
+        @apply block w-full px-3 py-2 text-sm placeholder-gray-400 bg-gray-100 border border-gray-300 rounded-md shadow-md appearance-none focus:outline-none focus:ring-2  focus:ring-primary focus:bg-white
+    }
+}
+
+@layer utilities {
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        /* scroll-behavior: smooth; */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .screen-center {
+        @apply inset-0 flex items-center justify-center w-full min-h-screen;
+    }
+}
