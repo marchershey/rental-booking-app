@@ -4,11 +4,55 @@
 
 @import "~flatpickr/dist/flatpickr.min.css";
 @layer components {
+    /* .flatpickr-days {
+        @apply w-full min-w-full max-w-full !important;
+    }
+    .dayContainer {
+        @apply w-full min-w-full max-w-full !important;
+    }
     .flatpickr-calendar {
         @apply w-full !important;
+    } */
+    .flatpickr-calendar.inline {
+        width: 100% !important;
+    }
+    .flatpickr-rContainer {
+        @apply mx-auto overflow-x-auto !important;
     }
     .flatpickr-day.today:not(.flatpickr-day.selected) {
         @apply border-0 border-b-2 rounded-none !important;
+    }
+    .flatpickr-day.selected {
+        color: #ffffff !important;
+    }
+    .flatpickr-day.inRange:not(.nextMonthDay) {
+        /* background-color: #e6e6e6 !important; */
+        @apply bg-blue-100 !important;
+        -webkit-box-shadow: -5px 0 0 #dbeafe, 5px 0 0 #dbeafe !important;
+        box-shadow: -5px 0 0 #dbeafe, 5px 0 0 #dbeafe !important;
+        
+    }
+    .flatpickr-day.startRange {
+        @apply bg-primary rounded-l-lg text-white !important;
+    }
+    .flatpickr-day.inRange:not(.startRange):not(.endRange) {
+        color: #393939 !important;
+        border-color: #dbeafe !important; 
+        @apply bg-blue-100 !important;
+    }
+    .flatpickr-day.endRange {
+        @apply bg-primary rounded-r-lg text-white !important;
+    }
+    .flatpickr-day.nextMonthDay:not(.selected):not(.flatpickr-disabled) {
+        @apply text-gray-400 !important;
+    }
+    .flatpickr-day.nextMonthDay.inRange:not(.selected) {        
+        color: #393939 !important;
+        -webkit-box-shadow: -5px 0 0 #dbeafe, 5px 0 0 #dbeafe !important;
+        box-shadow: -5px 0 0 #dbeafe, 5px 0 0 #dbeafe !important;
+    }
+    .dayContainer {
+        @apply justify-items-start !important;
     }
 }
 
@@ -65,6 +109,8 @@
 }
 
 @layer utilities {
+    [x-cloak] { display: none !important; }
+    
     .no-scrollbar {
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */

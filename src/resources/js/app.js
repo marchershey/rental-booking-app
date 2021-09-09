@@ -39,6 +39,27 @@ window.Flatpickr = flatpickr
 // *******************************************************
 
 
+
+// *******************************************************
+/**
+ * MomentJS
+ */
+import moment from 'moment'
+window.moment = moment
+// *******************************************************
+
+// *******************************************************
+/**
+ * MomentJS
+ */
+import Cleave from 'cleave.js';
+import CleavePhone from 'cleave.js/dist/addons/cleave-phone.us';
+window.Cleave = Cleave
+// *******************************************************
+
+
+
+
 // import Swiper bundle with all modules installed
 // import Swiper from 'swiper/bundle';
 // var swiper = new Swiper(".mySwiper", {

@@ -4,6 +4,24 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\Pages\LandingController::class, 'index'])->name('landing');
+Route::get('/reserve', [\App\Http\Controllers\Pages\ReservationPageController::class, 'index'])->name('reservation');
+
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Pages\LandingController::class, 'index'])->name('admin');
+
+
+
+
+    // Route::view('/', 'pages.dashboard.admin.index');
+});
+
+
+// //////////////////////////////////////////////
+
+
+
+
+
 
 // Route::middleware('auth')->group(function () {
 Route::view('/book', 'pages.book');
@@ -20,8 +38,4 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');
-});
-
-Route::prefix('admin')->group(function () {
-    Route::view('/', 'pages.dashboard.admin.index');
 });

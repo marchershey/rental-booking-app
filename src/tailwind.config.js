@@ -22,10 +22,20 @@ module.exports = {
             blue: colors.blue,
             indigo: colors.indigo
         },
+        variants: {
+            extend: {
+                backgroundColor: ['disabled'],
+                textColor: ['disabled'],
+            }
+        },
         extend: {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
         },
+        plugins: [
+            require('@tailwindcss/forms'),
+        ],
+
     },
 }

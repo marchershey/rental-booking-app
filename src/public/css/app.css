@@ -2101,14 +2101,80 @@ video {
   }
 }
 
-.flatpickr-calendar {
+/* .flatpickr-days {
+        @apply w-full min-w-full max-w-full !important;
+    }
+    .dayContainer {
+        @apply w-full min-w-full max-w-full !important;
+    }
+    .flatpickr-calendar {
+        @apply w-full !important;
+    } */
+
+.flatpickr-calendar.inline {
   width: 100% !important;
+}
+
+.flatpickr-rContainer {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  overflow-x: auto !important;
 }
 
 .flatpickr-day.today:not(.flatpickr-day.selected) {
   border-radius: 0px !important;
   border-width: 0px !important;
   border-bottom-width: 2px !important;
+}
+
+.flatpickr-day.selected {
+  color: #ffffff !important;
+}
+
+.flatpickr-day.inRange:not(.nextMonthDay) {
+  /* background-color: #e6e6e6 !important; */
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(219, 234, 254, var(--tw-bg-opacity)) !important;
+  box-shadow: -5px 0 0 #dbeafe, 5px 0 0 #dbeafe !important;
+}
+
+.flatpickr-day.startRange {
+  border-top-left-radius: 0.5rem !important;
+  border-bottom-left-radius: 0.5rem !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(59, 130, 246, var(--tw-bg-opacity)) !important;
+  --tw-text-opacity: 1 !important;
+  color: rgba(255, 255, 255, var(--tw-text-opacity)) !important;
+}
+
+.flatpickr-day.inRange:not(.startRange):not(.endRange) {
+  color: #393939 !important;
+  border-color: #dbeafe !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(219, 234, 254, var(--tw-bg-opacity)) !important;
+}
+
+.flatpickr-day.endRange {
+  border-top-right-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(59, 130, 246, var(--tw-bg-opacity)) !important;
+  --tw-text-opacity: 1 !important;
+  color: rgba(255, 255, 255, var(--tw-text-opacity)) !important;
+}
+
+.flatpickr-day.nextMonthDay:not(.selected):not(.flatpickr-disabled) {
+  --tw-text-opacity: 1 !important;
+  color: rgba(161, 161, 170, var(--tw-text-opacity)) !important;
+}
+
+.flatpickr-day.nextMonthDay.inRange:not(.selected) {
+  color: #393939 !important;
+  box-shadow: -5px 0 0 #dbeafe, 5px 0 0 #dbeafe !important;
+}
+
+.dayContainer {
+  justify-items: start !important;
 }
 
 .button.big {
@@ -29202,6 +29268,9 @@ video {
 
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[x-cloak] { display: none !important;
 }
 
 .no-scrollbar {
