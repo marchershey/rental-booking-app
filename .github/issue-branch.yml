@@ -1,3 +1,3 @@
-branchName: 'auto: ${issue.title,}-${issue.number}'
+branchName: '${issue.title,}-${issue.number}'
 mode: auto
 defaultBranch: 'dev'
