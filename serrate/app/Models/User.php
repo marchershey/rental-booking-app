@@ -41,4 +41,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Returns the user's profile if it exists, null if it doesn't
+     *
+     * @var array<string, string>
+     */
+    public static function returnIfExists($userData){
+        $user = User::where('email', $userData['email'])->where('first_name', $userData['first_name'])->where('last_name', $userData['last_name'])->first();
+
+        if($user){
+            return $user;
+        }
+
+        return false;
+    }
+
+    /**
+     * Create a new user
+     *
+     * @var array<string, string>
+     */
+    public static function createUser(Array $userData){
+        $user = new User();
+        $user->first_name = $userData['first_name'];
+        $user->last_name = $userData['last_name'];
+        $user->email = $userData['email'];
+
+        if($user->save()){
+            return $user;
+        }
+
+        return false;
+
+    }
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ReserveController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'frontend.index');
+// Route::view('/reserve', 'frontend.reserve')->middleware('auth')->name('reserve');
+Route::get('/reserve', function () {
+    return 'test';
+})->name('reserve')->middleware('auth');
+Route::view('/login', 'frontend.login')->middleware('guest')->name('login');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

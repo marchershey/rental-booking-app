@@ -1,0 +1,14 @@
+{
+    "editor.defaultFormatter": "HookyQR.beautify",
+    "editor.formatOnSave": true,
+    // blade
+    "blade.format.enable": true,
+    "blade.newLine": true,
+    "[blade]": {
+        "editor.autoClosingBrackets": "always",
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter",
+        // "editor.defaultFormatter": "austenc.laravel-blade-spacer",
+        // "editor.defaultFormatter": "apility.beautify-blade",
+        // "editor.defaultFormatter": "onecentlin.laravel-blade",
+    }
+}
