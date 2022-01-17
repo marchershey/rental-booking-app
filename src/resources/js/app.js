@@ -5,4 +5,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // AlpineJS
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
-Alpine.start()
+window.addEventListener('load', function () {
+    Alpine.start()
+})

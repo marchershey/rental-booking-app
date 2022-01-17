@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class PropertiesController extends Controller
 {
-    public function create() {
+    public function addNewProperty(Request $request) {
         // validate
         // add
+        return $request;
     }
 }

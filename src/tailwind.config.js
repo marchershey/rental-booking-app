@@ -9,6 +9,7 @@ module.exports = {
         extend: {
             colors: {
                 gray: colors.zinc,
+                muted: colors.gray[400],
             },
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],

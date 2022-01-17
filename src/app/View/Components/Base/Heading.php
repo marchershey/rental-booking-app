@@ -1,19 +1,23 @@
 <?php
 
-namespace App\View\Components\Forms;
+namespace App\View\Components\Base;
 
 use Illuminate\View\Component;
 
-class Input extends Component
+class Heading extends Component
 {
+    public $title;
+    public $desc;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title = null, $desc = null)
     {
-        //
+        $this->title = $title;
+        $this->desc = $desc;
     }
 
     /**
@@ -23,6 +27,6 @@ class Input extends Component
      */
     public function render()
     {
-        return view('components.forms.input');
+        return view('components.base.heading');
     }
 }
