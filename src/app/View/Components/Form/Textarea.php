@@ -6,12 +6,11 @@ use Illuminate\View\Component;
 
 class Textarea extends Component
 {
-    public $inputId;
-    public $inputType;
     public $title;
     public $desc;
     public $placeholder;
     public $optional;
+    public $max;
     public $wireId;
 
 
@@ -20,14 +19,13 @@ class Textarea extends Component
      *
      * @return void
      */
-    public function __construct($inputId = null, $inputType = null, $title = null, $desc = null, $placeholder = null, $optional = null, $wireId = null)
+    public function __construct($title = null, $desc = null, $placeholder = null, $optional = null, $max = null, $wireId = null)
     {
-        $this->inputId = $inputId ?? rand();
-        $this->inputType = $inputType ?? "text";
         $this->title = $title ?? "NO TITLE SET";
         $this->desc = $desc ?? false;
         $this->placeholder = $placeholder ?? $title;
         $this->optional = $optional ?? false;
+        $this->max = $max ?? false;
         $this->wireId = $wireId ?? false;
     }
 

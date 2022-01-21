@@ -4,6 +4,8 @@ const colors = require('tailwindcss/colors')
 module.exports = {
     content: [
         "./resources/**/*.blade.php",
+        './vendor/usernotnull/tall-toasts/config/**/*.php',
+        './vendor/usernotnull/tall-toasts/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {

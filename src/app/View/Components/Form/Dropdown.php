@@ -6,14 +6,12 @@ use Illuminate\View\Component;
 
 class Dropdown extends Component
 {
-    public $inputId;
     public $title;
     public $desc;
-    public $placeholder;
     public $optional;
-    public $wireId;
+    public $placeholder;
     public $options;
-
+    public $wireId;
     public $muted;
 
     /**
@@ -21,17 +19,14 @@ class Dropdown extends Component
      *
      * @return void
      */
-    public function __construct($options, $inputId = null, $title = null, $desc = null, $placeholder = null, $optional = null, $wireId = null)
+    public function __construct($options, $title = null, $desc = null, $placeholder = null, $optional = null, $wireId = null)
     {
-        $this->inputId = $inputId ?? rand();
-        $this->inputType = $inputType ?? "text";
         $this->title = $title ?? "NO TITLE SET";
         $this->desc = $desc ?? false;
-        $this->placeholder = $placeholder;
         $this->optional = $optional ?? false;
-        $this->wireId = $wireId ?? false;
+        $this->placeholder = $placeholder;
         $this->options = collect($options) ?? false;
-
+        $this->wireId = $wireId ?? false;
         $this->muted = (isset($placeholder)) ? 'true' : 'false';
     }
 

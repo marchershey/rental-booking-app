@@ -41,5 +41,7 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth.basic')->group(
     });
 });
 
+Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+
 // Photo uploads
 // Route::resource('photos', PhotosController::class);

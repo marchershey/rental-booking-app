@@ -15,13 +15,22 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->string('location')->nullable();
-            $table->decimal('rating')->default('0.00');
-            $table->boolean('visible')->default(true);
-            $table->boolean('archived')->default(false);
-            $table->integer('user_id');
+            $table->string('address')->nullable();
+            $table->string('unit')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('type')->nullable();
+            $table->string('guests')->nullable();
+            $table->string('bedrooms')->nullable();
+            $table->string('bathrooms')->nullable();
+            $table->string('listing_headline')->nullable();
+            $table->text('listing_desc')->nullable();
+            $table->string('listing_rating')->default('0.0')->nullable();
+            $table->string('listing_rating_count')->default('0')->nullable();
+            $table->boolean('visible')->default(true)->nullable();
+            $table->boolean('deleted')->default(false)->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

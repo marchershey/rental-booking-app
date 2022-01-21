@@ -1,12 +1,4 @@
 <x-layouts.base class="leading-5 tracking-wide text-gray-800">
-    <!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
--->
     <div x-data="{open: false}">
         <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
         <div class="md:hidden fixed inset-0 z-40 flex" role="dialog" aria-modal="true" x-show="open" x-transition x-cloak>
@@ -166,13 +158,13 @@
 
             <!-- Content -->
             <main class="flex-1">
-                <div class="max-w-screen-md py-6 space-y-6">
-                    <div class="px-6 mx-auto space-y-1">
+                <div class="max-w-screen-md py-5 space-y-5">
+                    <div class="px-5 mx-auto space-y-1">
                         <h1 class="text-3xl font-medium leading-6 text-gray-900">{{ $header ?? 'SET HEADER AND SUBHEADER' }}</h1>
                         <h2 class="text-muted text-sm">{{ $subheader ?? null }}</h2>
                     </div>
-                    <div class="px-6 mx-auto">
-                        <div class="space-y-6">
+                    <div class="px-5 mx-auto">
+                        <div class="space-y-5">
                             {{ $slot }}
                         </div>
                     </div>

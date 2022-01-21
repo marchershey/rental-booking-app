@@ -14,11 +14,12 @@
     @livewireStyles
     <!-- Scripts -->
     @livewireScripts
+    @toastScripts
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 <body class="touch-manipulation relative h-full">
-
+    <livewire:toasts />
     {{-- size indicator --}}
     <div class="fixed bottom-0 z-50 px-2 bg-white">
         <div class="sm:hidden">xs</div>
@@ -28,11 +29,8 @@
         <div class="xl:block 2xl:hidden hidden">xl</div>
         <div class="2xl:block hidden">2xl</div>
     </div>
-
     <!-- container -->
     <div> {{ $slot }} </div>
-
-
 </body>
 
 </html>

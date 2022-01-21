@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class Ticker extends Component
 {
-    public $value;
+    public $default;
     public $step;
     public $min;
     public $max;
@@ -23,13 +23,11 @@ class Ticker extends Component
     {
         $this->title = $title;
         $this->desc = $desc;
-        $this->value = $default;
+        $this->default = $default;
         $this->step = $step;
         $this->min = $min;
         $this->max = $max;
         $this->wireId = $wireId;
-
-        $this->value = $default;
     }
 
     /**
