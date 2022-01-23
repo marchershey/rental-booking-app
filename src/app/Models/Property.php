@@ -10,4 +10,12 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [];
+
+    /**
+     * Get the photos for the property.
+     */
+    public function photos()
+    {
+        return $this->hasMany(Photo::class)->orderBy('slot');
+    }
 }

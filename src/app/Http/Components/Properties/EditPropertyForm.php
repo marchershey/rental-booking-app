@@ -5,16 +5,17 @@ namespace App\Http\Components\Properties;
 use App\Models\Photo;
 use App\Models\Property;
 use Illuminate\Support\Facades\Auth;
-use Usernotnull\Toast\Concerns\WireToast;
-
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Usernotnull\Toast\Concerns\WireToast;
 
-class NewPropertyForm extends Component
+class EditPropertyForm extends Component
 {
     use WithFileUploads;
     use WireToast;
 
+    public $property;
     public $address;
     public $unit;
     public $city;
@@ -30,6 +31,7 @@ class NewPropertyForm extends Component
     public $listing_rating_count;
 
     public $photos = [];
+    public $uploadedPhotos = [];
     public $maxPhotos = 3;
 
     protected $rules = [
@@ -46,28 +48,30 @@ class NewPropertyForm extends Component
         'listing_desc' => 'required',
         'listing_rating' => 'nullable|numeric|min:1|max:5',
         'listing_rating_count' => 'nullable|numeric|min:0',
-        'photos' => 'required|min:1',
-        'photos.*' => 'image|max:12288',
+        'photos' => 'nullable|max:12288',
+        'photos.*' => 'nullable|image'
     ];
 
     public function render()
     {
-        return view('components.properties.new-property-form');
+        return view('components.properties.edit-property-form');
     }
 
-    public function mount()
+    public function mount(Property $property)
     {
-        $this->address = "123 address ave";
-        $this->unit = "1a";
-        $this->city = "lexington";
-        $this->state = "KY";
-        $this->zip = "10001";
-        $this->type = "house";
-        $this->guests = 6;
-        $this->bedrooms = 2;
-        $this->bathrooms = 1.5;
-        $this->listing_headline = "Listing Head";
-        $this->listing_desc = "This is the listing description with long text";
+        $this->property = $property;
+        $this->address = $property->address;
+        $this->unit = $property->unit;
+        $this->city = $property->city;
+        $this->state = $property->state;
+        $this->zip = $property->zip;
+        $this->type = $property->type;
+        $this->guests = $property->guests;
+        $this->bedrooms = $property->bedrooms;
+        $this->bathrooms = $property->bathrooms;
+        $this->listing_headline = $property->listing_headline;
+        $this->listing_desc = $property->listing_desc;
+        $this->uploadedPhotos = $property->photos->toArray();
     }
 
     public function updated($propertyName)
@@ -77,15 +81,27 @@ class NewPropertyForm extends Component
 
     public function removeImage($key)
     {
-        unset($this->photos[$key]);
+
     }
 
     public function submit()
     {
+        if($this->photos){
+            dd('yes');
+        }else{
+            dd('no');
+        }
+
+
+
         $this->validate();
 
-        // try {
-            $property = new Property();
+
+
+
+
+        try {
+            $property = Property::find($this->property->id);
             $property->address = $this->address;
             $property->unit = $this->unit;
             $property->city = $this->city;
@@ -105,27 +121,19 @@ class NewPropertyForm extends Component
             foreach ($this->photos as $key => $photo) {
                 // MAX PHOTOS VALIDATION
                 if($key < $this->maxPhotos){
-                    $photoPath = $photo->storePublicly('photos', 'public');
-                    Photo::create([
-                        'name' => $this->photos[$key]->getFilename(),
-                        'filename' => $this->photos[$key]->getClientOriginalName(),
-                        'size' => $this->photos[$key]->getSize(),
-                        'order' => $this->photos[$key],
-                        'path' => $photoPath,
-                        'property_id' => $property->id,
-                        'user_id' => Auth::user()->id
-                    ]);
+                    $this->photos[$key] = $photo->storePublicly('photos', 'public');
+                    Photo::create(['path' => $this->photos[$key], 'property_id' => $property->id, 'user_id' => Auth::user()->id]);
                 }else{
                     unset($this->photos[$key]);
                 }
             }
 
-        // } catch (\Exception $e) {
-        //     toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
-        //     return;
-        // }
+        } catch (\Exception $e) {
+            toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
+            return;
+        }
 
-        toast()->success('Your property was created.')->pushOnNextPage();
+        toast()->success('Your property was updated.')->pushOnNextPage();
         return redirect()->route('dashboard.properties.index');
     }
 }

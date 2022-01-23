@@ -49,13 +49,15 @@
                         </div>
                     </div>
                 </div>
-                @if ($photos)
-                    <div>
-                        <ul role="list" class="sm:grid-cols-3 sm:gap-5 lg:grid-cols-3 grid grid-cols-2 gap-3">
+
+
+                <div>
+                    <ul role="list" class="sm:grid-cols-3 sm:gap-5 lg:grid-cols-3 grid grid-cols-2 gap-3">
+                        @if ($photos)
                             @foreach ($photos as $key => $photo)
                                 <li class="group relative cursor-pointer" wire:click="removeImage({{ $key }})">
                                     <div class="aspect-w-3 aspect-h-2 group-hover:border-red-500 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
-                                        <img src="{{ $photo->temporaryUrl('test') }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-1000 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
+                                        <img src="{{ $photo->temporaryUrl() }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-1000 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
                                     </div>
                                     <div class="flex items-center justify-between mt-1">
                                         <div class="truncate">
@@ -79,9 +81,38 @@
                                     </div>
                                 </li>
                             @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        @endif
+                        @if ($uploadedPhotos)
+                            @foreach ($uploadedPhotos as $key => $photo)
+                                <li class="group relative cursor-pointer" wire:click="removeImage({{ $key }})">
+                                    <div class="aspect-w-3 aspect-h-2 group-hover:border-red-500 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
+                                        <img src="{{ '/storage/' . $photo['path'] }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-1000 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
+                                    </div>
+                                    <div class="flex items-center justify-between mt-1">
+                                        <div class="truncate">
+                                            <p class="group-hover:text-red-500 block w-full text-sm font-medium truncate pointer-events-none">{{ $photo['filename'] }}</p>
+                                            <div class="text-muted text-xs">
+                                                <p class="group-hover:hidden block">
+                                                    @if ($loop->iteration > $maxPhotos)
+                                                        <span class="italic">This will not be uploaded</span>
+                                                    @else
+                                                        <span>{{ number_format($photo['size'] / 1000 / 1000, 3) }} MB</span>
+                                                    @endif
+                                                </p>
+                                                <p class="group-hover:block hidden">Remove this photo...</p>
+                                            </div>
+                                        </div>
+                                        <div class="p-1 pr-0 mt-1">
+                                            <svg class="group-hover:text-red-500 w-7 h-7 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endif
+                    </ul>
+                </div>
             </div>
         </x-base.div-box>
 

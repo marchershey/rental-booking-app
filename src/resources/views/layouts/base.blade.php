@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-200">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-200 select-none">
 
 <head>
     <meta charset="utf-8">
@@ -10,12 +10,12 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?{{ rand() }}">
     @livewireStyles
     <!-- Scripts -->
     @livewireScripts
     @toastScripts
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}?{{ rand() }}"></script>
 </head>
 
 <body class="touch-manipulation relative h-full">
