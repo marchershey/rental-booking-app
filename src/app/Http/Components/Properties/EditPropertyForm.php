@@ -66,19 +66,19 @@ class EditPropertyForm extends Component
     public function loadProperty()
     {
         // sleep(5);
-        $this->property = Property::firstWhere('id', $this->propertyId);
-        $this->address = $this->property->address;
-        $this->unit = $this->property->unit;
-        $this->city = $this->property->city;
-        $this->state = $this->property->state;
-        $this->zip = $this->property->zip;
-        $this->type = $this->property->type;
-        $this->guests = $this->property->guests;
-        $this->bedrooms = $this->property->bedrooms;
-        $this->bathrooms = $this->property->bathrooms;
-        $this->listing_headline = $this->property->listing_headline;
-        $this->listing_desc = $this->property->listing_desc;
-        $this->uploadedPhotos = $this->property->photos->toArray();
+        // $this->property = Property::firstWhere('id', $this->propertyId);
+        // $this->address = $this->property->address;
+        // $this->unit = $this->property->unit;
+        // $this->city = $this->property->city;
+        // $this->state = $this->property->state;
+        // $this->zip = $this->property->zip;
+        // $this->type = $this->property->type;
+        // $this->guests = $this->property->guests;
+        // $this->bedrooms = $this->property->bedrooms;
+        // $this->bathrooms = $this->property->bathrooms;
+        // $this->listing_headline = $this->property->listing_headline;
+        // $this->listing_desc = $this->property->listing_desc;
+        // $this->uploadedPhotos = $this->property->photos->toArray();
     }
 
     public function hydrate()
@@ -108,7 +108,8 @@ class EditPropertyForm extends Component
     public function submit()
     {
         $this->validate();
-        // try {
+
+        try {
             $property = Property::find($this->property->id);
             $property->address = $this->address;
             $property->unit = $this->unit;
@@ -144,11 +145,10 @@ class EditPropertyForm extends Component
                     }
                 }
             }
-
-        // } catch (\Exception $e) {
-        //     toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
-        //     return;
-        // }
+        } catch (\Exception $e) {
+            toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
+            return;
+        }
 
         toast()->success('Your property was updated.')->pushOnNextPage();
         return redirect()->route('dashboard.properties.index');
