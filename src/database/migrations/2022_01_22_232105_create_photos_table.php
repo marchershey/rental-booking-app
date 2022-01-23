@@ -18,7 +18,6 @@ class CreatePhotosTable extends Migration
             $table->string('name');
             $table->string('filename');
             $table->string('size');
-            $table->integer('order');
             $table->string('path');
             $table->integer('property_id');
             $table->integer('user_id');
