@@ -84,7 +84,7 @@ class NewPropertyForm extends Component
     {
         $this->validate();
 
-        // try {
+        try {
             $property = new Property();
             $property->address = $this->address;
             $property->unit = $this->unit;
@@ -118,11 +118,10 @@ class NewPropertyForm extends Component
                     unset($this->stagedPhotos[$key]);
                 }
             }
-
-        // } catch (\Exception $e) {
-        //     toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
-        //     return;
-        // }
+        } catch (\Exception $e) {
+            toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
+            return;
+        }
 
         toast()->success('Your property was created.')->pushOnNextPage();
         return redirect()->route('dashboard.properties.index');
