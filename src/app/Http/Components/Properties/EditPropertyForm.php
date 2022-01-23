@@ -15,6 +15,7 @@ class EditPropertyForm extends Component
     use WithFileUploads;
     use WireToast;
 
+    public $propertyId;
     public $property;
     public $address;
     public $unit;
@@ -30,9 +31,9 @@ class EditPropertyForm extends Component
     public $listing_rating;
     public $listing_rating_count;
 
-    public $photos = [];
+    public $stagedPhotos;
     public $uploadedPhotos = [];
-    public $maxPhotos = 3;
+    public $maxPhotos = 30;
 
     protected $rules = [
         'address' => 'required|string|regex:/^[a-zA-Z0-9\s]+$/',
@@ -48,8 +49,8 @@ class EditPropertyForm extends Component
         'listing_desc' => 'required',
         'listing_rating' => 'nullable|numeric|min:1|max:5',
         'listing_rating_count' => 'nullable|numeric|min:0',
-        'photos' => 'nullable|max:12288',
-        'photos.*' => 'nullable|image'
+        'stagedPhotos' => 'nullable|max:12288',
+        'stagedPhotos.*' => 'nullable|image'
     ];
 
     public function render()
@@ -57,21 +58,33 @@ class EditPropertyForm extends Component
         return view('components.properties.edit-property-form');
     }
 
-    public function mount(Property $property)
+    public function mount($propertyId)
     {
-        $this->property = $property;
-        $this->address = $property->address;
-        $this->unit = $property->unit;
-        $this->city = $property->city;
-        $this->state = $property->state;
-        $this->zip = $property->zip;
-        $this->type = $property->type;
-        $this->guests = $property->guests;
-        $this->bedrooms = $property->bedrooms;
-        $this->bathrooms = $property->bathrooms;
-        $this->listing_headline = $property->listing_headline;
-        $this->listing_desc = $property->listing_desc;
-        $this->uploadedPhotos = $property->photos->toArray();
+        $this->propertyId = $propertyId;
+    }
+
+    public function loadProperty()
+    {
+        // sleep(5);
+        $this->property = Property::firstWhere('id', $this->propertyId);
+        $this->address = $this->property->address;
+        $this->unit = $this->property->unit;
+        $this->city = $this->property->city;
+        $this->state = $this->property->state;
+        $this->zip = $this->property->zip;
+        $this->type = $this->property->type;
+        $this->guests = $this->property->guests;
+        $this->bedrooms = $this->property->bedrooms;
+        $this->bathrooms = $this->property->bathrooms;
+        $this->listing_headline = $this->property->listing_headline;
+        $this->listing_desc = $this->property->listing_desc;
+        $this->uploadedPhotos = $this->property->photos->toArray();
+    }
+
+    public function hydrate()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     public function updated($propertyName)
@@ -79,28 +92,23 @@ class EditPropertyForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function removeImage($key)
+    public function removeUploadedPhoto(Photo $photo)
     {
+        Storage::delete('public/' . $photo->path); // delete file
+        $photo->delete(); // delete in db
+        $this->loadProperty(); // refresh property
+        toast()->success('Photo deleted successfully')->push();
+    }
 
+    public function removeStagedPhoto($key)
+    {
+        unset($this->stagedPhotos[$key]);
     }
 
     public function submit()
     {
-        if($this->photos){
-            dd('yes');
-        }else{
-            dd('no');
-        }
-
-
-
         $this->validate();
-
-
-
-
-
-        try {
+        // try {
             $property = Property::find($this->property->id);
             $property->address = $this->address;
             $property->unit = $this->unit;
@@ -118,20 +126,29 @@ class EditPropertyForm extends Component
             $property->user_id = Auth::user()->id;
             $property->save();
 
-            foreach ($this->photos as $key => $photo) {
-                // MAX PHOTOS VALIDATION
-                if($key < $this->maxPhotos){
-                    $this->photos[$key] = $photo->storePublicly('photos', 'public');
-                    Photo::create(['path' => $this->photos[$key], 'property_id' => $property->id, 'user_id' => Auth::user()->id]);
-                }else{
-                    unset($this->photos[$key]);
+            if($this->stagedPhotos){
+                foreach ($this->stagedPhotos as $key => $photo) {
+                    // MAX PHOTOS VALIDATION
+                    if($key < $this->maxPhotos){
+                        $photoPath = $photo->storePublicly('photos', 'public');
+                        Photo::create([
+                            'name' => $this->stagedPhotos[$key]->getFilename(),
+                            'filename' => $this->stagedPhotos[$key]->getClientOriginalName(),
+                            'size' => $this->stagedPhotos[$key]->getSize(),
+                            'path' => $photoPath,
+                            'property_id' => $property->id,
+                            'user_id' => Auth::user()->id
+                        ]);
+                    }else{
+                        unset($this->stagedPhotos[$key]);
+                    }
                 }
             }
 
-        } catch (\Exception $e) {
-            toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
-            return;
-        }
+        // } catch (\Exception $e) {
+        //     toast()->danger('There was a problem on our end. (' . $e->getCode() . ')', 'Error')->push();
+        //     return;
+        // }
 
         toast()->success('Your property was updated.')->pushOnNextPage();
         return redirect()->route('dashboard.properties.index');

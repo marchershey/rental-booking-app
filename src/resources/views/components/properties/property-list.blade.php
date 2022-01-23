@@ -8,7 +8,9 @@
                         <a href="/dashboard/properties/{{ $property->id }}">
                             <li class="group relative cursor-pointer">
                                 <div class="aspect-w-3 aspect-h-2 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
-                                    <img src="/storage/{{ $property->photos()->first()->path }}" alt="" class="object-cover object-center w-full pointer-events-none">
+                                    @if ($property->photos()->first())
+                                        <img src="/storage/{{ $property->photos()->first()->path }}" alt="" class="object-cover object-center w-full pointer-events-none">
+                                    @endif
                                 </div>
                                 <div class="flex flex-col mt-1">
                                     <span class="block w-full text-sm font-medium truncate pointer-events-none">{{ $property->listing_headline }}</span>

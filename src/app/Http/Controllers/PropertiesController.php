@@ -12,6 +12,6 @@ class PropertiesController extends Controller
     }
 
     public function editProperty(Request $request, Property $property) {
-        return view('pages.dashboard.properties.edit', ['property' => $property]);
+        return view('pages.dashboard.properties.edit', ['propertyId' => $property->id]);
     }
 }

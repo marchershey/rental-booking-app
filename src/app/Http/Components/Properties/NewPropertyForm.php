@@ -29,8 +29,8 @@ class NewPropertyForm extends Component
     public $listing_rating;
     public $listing_rating_count;
 
-    public $photos = [];
-    public $maxPhotos = 3;
+    public $stagedPhotos = [];
+    public $maxPhotos = 30;
 
     protected $rules = [
         'address' => 'required|string|regex:/^[a-zA-Z0-9\s]+$/',
@@ -46,8 +46,8 @@ class NewPropertyForm extends Component
         'listing_desc' => 'required',
         'listing_rating' => 'nullable|numeric|min:1|max:5',
         'listing_rating_count' => 'nullable|numeric|min:0',
-        'photos' => 'required|min:1',
-        'photos.*' => 'image|max:12288',
+        'stagedPhotos' => 'required|min:1',
+        'stagedPhotos.*' => 'image|max:12288',
     ];
 
     public function render()
@@ -77,7 +77,7 @@ class NewPropertyForm extends Component
 
     public function removeImage($key)
     {
-        unset($this->photos[$key]);
+        unset($this->stagedPhotos[$key]);
     }
 
     public function submit()
@@ -102,21 +102,20 @@ class NewPropertyForm extends Component
             $property->user_id = Auth::user()->id;
             $property->save();
 
-            foreach ($this->photos as $key => $photo) {
+            foreach ($this->stagedPhotos as $key => $photo) {
                 // MAX PHOTOS VALIDATION
                 if($key < $this->maxPhotos){
                     $photoPath = $photo->storePublicly('photos', 'public');
                     Photo::create([
-                        'name' => $this->photos[$key]->getFilename(),
-                        'filename' => $this->photos[$key]->getClientOriginalName(),
-                        'size' => $this->photos[$key]->getSize(),
-                        'order' => $this->photos[$key],
+                        'name' => $this->stagedPhotos[$key]->getFilename(),
+                        'filename' => $this->stagedPhotos[$key]->getClientOriginalName(),
+                        'size' => $this->stagedPhotos[$key]->getSize(),
                         'path' => $photoPath,
                         'property_id' => $property->id,
                         'user_id' => Auth::user()->id
                     ]);
                 }else{
-                    unset($this->photos[$key]);
+                    unset($this->stagedPhotos[$key]);
                 }
             }
 
