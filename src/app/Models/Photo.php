@@ -10,4 +10,9 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'filename', 'size', 'path', 'property_id', 'user_id'];
+
+    public function properties()
+    {
+        return $this->belongsTo(Property::class);
+    }
 }

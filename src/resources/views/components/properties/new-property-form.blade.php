@@ -7,7 +7,8 @@
                 <x-form.text-field wireId="address" title="Address" placeholder="1834 Wake Forest Rd" class="col-span-8" />
                 <x-form.text-field wireId="unit" title="Unit" placeholder="1A" optional class="col-span-4" />
                 <x-form.text-field wireId="city" title="City" placeholder="Winston-Salem" class="col-span-12" />
-                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." class="col-span-8" default="AK" :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
+                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." class="col-span-8" default="AK"
+                    :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
                 <x-form.text-field wireId="zip" title="Zip" placeholder="27109" class="col-span-4" />
             </div>
         </x-base.div-box>
@@ -39,9 +40,9 @@
                 <div x-data="{ progress: 0 }" x-on:livewire-upload-progress="progress = $event.detail.progress">
                     <div class="md:flex-row md:space-x-5 md:space-y-0 md:items-center md:justify-between flex flex-col space-y-2">
                         <div class="flex-shrink-none">
-                            <input type="file" accept="image/*" wire:model="photos" multiple class="focus:outline-none focus:ring">
+                            <input type="file" accept="image/*" wire:model="stagedPhotos" multiple class="focus:outline-none focus:ring">
                         </div>
-                        <div wire:loading.remove wire:target="photos" class="text-muted text-xs">
+                        <div wire:loading.remove wire:target="stagedPhotos" class="text-muted text-xs">
                             Max 30 photos, 20MB
                         </div>
                         <div class="bg-blue-50 relative w-full h-5 overflow-hidden rounded-full" wire:loading wire:target="photos">
@@ -49,10 +50,10 @@
                         </div>
                     </div>
                 </div>
-                @if ($photos)
+                @if ($stagedPhotos)
                     <div>
                         <ul role="list" class="sm:grid-cols-3 sm:gap-5 lg:grid-cols-3 grid grid-cols-2 gap-3">
-                            @foreach ($photos as $key => $photo)
+                            @foreach ($stagedPhotos as $key => $photo)
                                 <li class="group relative cursor-pointer" wire:click="removeImage({{ $key }})">
                                     <div class="aspect-w-3 aspect-h-2 group-hover:border-red-500 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
                                         <img src="{{ $photo->temporaryUrl('test') }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-1000 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">

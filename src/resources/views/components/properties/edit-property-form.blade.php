@@ -1,4 +1,4 @@
-<div class="max-w-screen-sm">
+<div class="max-w-screen-sm" wire:init="loadProperty()">
 
     <div class="space-y-5">
         <x-base.div-box class="">
@@ -7,7 +7,8 @@
                 <x-form.text-field wireId="address" title="Address" placeholder="1834 Wake Forest Rd" class="col-span-8" />
                 <x-form.text-field wireId="unit" title="Unit" placeholder="1A" optional class="col-span-4" />
                 <x-form.text-field wireId="city" title="City" placeholder="Winston-Salem" class="col-span-12" />
-                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." class="col-span-8" default="AK" :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
+                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." class="col-span-8" default="AK"
+                    :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
                 <x-form.text-field wireId="zip" title="Zip" placeholder="27109" class="col-span-4" />
             </div>
         </x-base.div-box>
@@ -39,12 +40,12 @@
                 <div x-data="{ progress: 0 }" x-on:livewire-upload-progress="progress = $event.detail.progress">
                     <div class="md:flex-row md:space-x-5 md:space-y-0 md:items-center md:justify-between flex flex-col space-y-2">
                         <div class="flex-shrink-none">
-                            <input type="file" accept="image/*" wire:model="photos" multiple class="focus:outline-none focus:ring">
+                            <input type="file" accept="image/*" wire:model="stagedPhotos" multiple class="focus:outline-none focus:ring">
                         </div>
-                        <div wire:loading.remove wire:target="photos" class="text-muted text-xs">
+                        <div wire:loading.remove wire:target="stagedPhotos" class="text-muted text-xs">
                             Max 30 photos, 20MB
                         </div>
-                        <div class="bg-blue-50 relative w-full h-5 overflow-hidden rounded-full" wire:loading wire:target="photos">
+                        <div class="bg-blue-50 relative w-full h-5 overflow-hidden rounded-full" wire:loading wire:target="stagedPhotos">
                             <div class="whitespace-nowrap absolute p-1 text-xs font-medium leading-none text-center text-white bg-blue-600 rounded-l-full" :style="{ 'width': progress + '%'}"> <span x-text="progress" class=""></span> %</div>
                         </div>
                     </div>
@@ -53,28 +54,25 @@
 
                 <div>
                     <ul role="list" class="sm:grid-cols-3 sm:gap-5 lg:grid-cols-3 grid grid-cols-2 gap-3">
-                        @if ($photos)
-                            @foreach ($photos as $key => $photo)
-                                <li class="group relative cursor-pointer" wire:click="removeImage({{ $key }})">
-                                    <div class="aspect-w-3 aspect-h-2 group-hover:border-red-500 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
-                                        <img src="{{ $photo->temporaryUrl() }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-1000 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
+                        @if ($uploadedPhotos)
+                            @foreach ($uploadedPhotos as $key => $photo)
+                                <li class="group relative" wire:key="uploadedPhotos_{{ $loop->index }}">
+                                    <div class="aspect-w-3 aspect-h-2 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
+                                        <img src="{{ '/storage/' . $photo['path'] }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-500 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
                                     </div>
                                     <div class="flex items-center justify-between mt-1">
                                         <div class="truncate">
-                                            <p class="group-hover:text-red-500 block w-full text-sm font-medium truncate pointer-events-none">{{ $photo->getClientOriginalName() }}</p>
+                                            <p class="block w-full text-sm font-medium truncate pointer-events-none">{{ $photo['filename'] }}</p>
                                             <div class="text-muted text-xs">
-                                                <p class="group-hover:hidden block">
-                                                    @if ($loop->iteration > $maxPhotos)
-                                                        <span class="italic">This will not be uploaded</span>
-                                                    @else
-                                                        <span>{{ number_format($photo->getSize() / 1000 / 1000, 3) }} MB</span>
-                                                    @endif
-                                                </p>
-                                                <p class="group-hover:block hidden">Remove this photo...</p>
+                                                @if ($loop->iteration > $maxPhotos)
+                                                    <span class="italic">This will not be uploaded</span>
+                                                @else
+                                                    <span>{{ number_format($photo['size'] / 1000 / 1000, 3) }} MB</span>
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="p-1 pr-0 mt-1">
-                                            <svg class="group-hover:text-red-500 w-7 h-7 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <div class="p-1 pr-0 mt-1 cursor-pointer" wire:click="removeUploadedPhoto({{ $photo['id'] }})">
+                                            <svg class="hover:text-red-500 w-7 h-7 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                             </svg>
                                         </div>
@@ -82,28 +80,25 @@
                                 </li>
                             @endforeach
                         @endif
-                        @if ($uploadedPhotos)
-                            @foreach ($uploadedPhotos as $key => $photo)
-                                <li class="group relative cursor-pointer" wire:click="removeImage({{ $key }})">
-                                    <div class="aspect-w-3 aspect-h-2 group-hover:border-red-500 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
-                                        <img src="{{ '/storage/' . $photo['path'] }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-1000 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
+                        @if ($stagedPhotos)
+                            @foreach ($stagedPhotos as $key => $photo)
+                                <li class="group relative" wire:key="stagedPhotos_{{ $loop->index }}">
+                                    <div class="aspect-w-3 aspect-h-2 block w-full overflow-hidden bg-gray-100 border border-transparent rounded-lg">
+                                        <img src="{{ $photo->temporaryUrl() }}" alt="" class="group-hover:scale-105 group-hover:-rotate-1 object-cover object-center w-full transition-transform duration-500 ease-in-out pointer-events-none @if ($loop->iteration > $maxPhotos) opacity-25 @endif">
                                     </div>
                                     <div class="flex items-center justify-between mt-1">
                                         <div class="truncate">
-                                            <p class="group-hover:text-red-500 block w-full text-sm font-medium truncate pointer-events-none">{{ $photo['filename'] }}</p>
+                                            <p class="block w-full text-sm font-medium truncate pointer-events-none">{{ $photo->getClientOriginalName() }}</p>
                                             <div class="text-muted text-xs">
-                                                <p class="group-hover:hidden block">
-                                                    @if ($loop->iteration > $maxPhotos)
-                                                        <span class="italic">This will not be uploaded</span>
-                                                    @else
-                                                        <span>{{ number_format($photo['size'] / 1000 / 1000, 3) }} MB</span>
-                                                    @endif
-                                                </p>
-                                                <p class="group-hover:block hidden">Remove this photo...</p>
+                                                @if ($loop->iteration > $maxPhotos)
+                                                    <span class="italic">This will not be uploaded</span>
+                                                @else
+                                                    <span>{{ number_format($photo->getSize() / 1000 / 1000, 3) }} MB</span>
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="p-1 pr-0 mt-1">
-                                            <svg class="group-hover:text-red-500 w-7 h-7 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <div class="p-1 pr-0 mt-1 cursor-pointer" wire:click="removeStagedPhoto({{ $key }})">
+                                            <svg class="hover:text-red-500 w-7 h-7 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                             </svg>
                                         </div>
