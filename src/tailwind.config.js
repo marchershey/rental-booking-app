@@ -10,8 +10,16 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                gray: colors.zinc,
+                gray: colors.gray,
                 muted: colors.gray[400],
+                primary: {
+                    DEFAULT: colors.blue[600],
+                    lighter: colors.blue[500],
+                    lightest: colors.blue[300],
+                    darker: colors.blue[800],
+                    hover: colors.blue[700],
+                    muted: colors.blue[300],
+                },
             },
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],

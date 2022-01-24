@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'pages.index');
+
+Route::name('frontend.')->group(function () {
+    Route::view('/', 'pages.frontend.index')->name('index');
+
+});
 
 // Dashboard
 Route::name('dashboard.')->prefix('dashboard')->middleware('auth.basic')->group(function () {
