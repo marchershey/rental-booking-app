@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="px-5 py-2">
-                    <a href="#" class="">
+                    <a href="/dashboard" class="">
                         Host Login
                     </a>
                 </div>
