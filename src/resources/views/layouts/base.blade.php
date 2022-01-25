@@ -21,7 +21,7 @@
 <body class="touch-manipulation relative h-full">
     <livewire:toasts />
     {{-- size indicator --}}
-    <div class="fixed top-0 right-0 z-50 px-1 text-xs bg-white">
+    <div class="fixed bottom-0 right-0 z-50 px-1 text-xs bg-white">
         <div class="sm:hidden">xs</div>
         <div class="sm:block md:hidden hidden">sm</div>
         <div class="md:block lg:hidden hidden">md</div>
