@@ -21,10 +21,10 @@ class CreatePropertiesTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip')->nullable();
             $table->string('type')->nullable();
-            $table->string('guests')->nullable();
-            $table->string('bedrooms')->nullable();
-            $table->string('beds')->nullable();
-            $table->string('bathrooms')->nullable();
+            $table->integer('guests')->nullable();
+            $table->integer('bedrooms')->nullable();
+            $table->integer('beds')->nullable();
+            $table->float('bathrooms', 3, 1)->nullable();
             $table->string('listing_headline')->nullable();
             $table->text('listing_desc')->nullable();
             $table->string('listing_rating')->nullable()->default('0.0');

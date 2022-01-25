@@ -59,16 +59,19 @@ class NewPropertyForm extends Component
 
     public function mount()
     {
+        // set defaults
+        $this->guests = 1;
+        $this->bedrooms = 0;
+        $this->beds = 0;
+        $this->bathrooms = 0;
+
+        // custom
         $this->address = "123 address ave";
         $this->unit = "1a";
         $this->city = "lexington";
         $this->state = "KY";
         $this->zip = "10001";
         $this->type = "house";
-        $this->guests = 6;
-        $this->bedrooms = 2;
-        $this->beds = 3;
-        $this->bathrooms = 1.5;
         $this->listing_headline = "Listing Head";
         $this->listing_desc = "This is the listing description with long text";
     }
