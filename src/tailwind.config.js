@@ -24,6 +24,12 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+            lineClamp: {
+                7: '7',
+                8: '8',
+                9: '9',
+                10: '10',
+            }
         },
     },
 
