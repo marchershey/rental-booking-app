@@ -12,7 +12,7 @@ class PropertyList extends Component
 
     public function render()
     {
-        return view('components.properties.property-list');
+        return view('components.backend.properties.property-list');
     }
 
     public function init()

@@ -55,7 +55,7 @@ class EditPropertyForm extends Component
 
     public function render()
     {
-        return view('components.properties.edit-property-form');
+        return view('components.backend.properties.edit-property-form');
     }
 
     public function mount($propertyId)

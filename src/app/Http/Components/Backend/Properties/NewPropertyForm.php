@@ -52,7 +52,7 @@ class NewPropertyForm extends Component
 
     public function render()
     {
-        return view('components.properties.new-property-form');
+        return view('components.backend.properties.new-property-form');
     }
 
     public function mount()
