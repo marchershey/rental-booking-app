@@ -29,7 +29,7 @@
                                     <div class="flex flex-wrap gap-2 mt-1">
                                         <div class="px-2 py-1 text-xs bg-gray-200 rounded">{{ $property->guests }} guests</div>
                                         <div class="px-2 py-1 text-xs bg-gray-200 rounded">{{ $property->bedrooms }} bedrooms</div>
-                                        <div class="px-2 py-1 text-xs bg-gray-200 rounded">### beds</div>
+                                        <div class="px-2 py-1 text-xs bg-gray-200 rounded">{{ $property->beds }} beds</div>
                                         <div class="px-2 py-1 text-xs bg-gray-200 rounded">{{ $property->bathrooms }} bathrooms</div>
                                     </div>
                                 </div>

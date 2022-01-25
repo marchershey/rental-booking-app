@@ -23,6 +23,7 @@ class NewPropertyForm extends Component
     public $type;
     public $guests;
     public $bedrooms;
+    public $beds;
     public $bathrooms;
     public $listing_headline;
     public $listing_desc;
@@ -41,6 +42,7 @@ class NewPropertyForm extends Component
         'type' => 'required|alpha',
         'guests' => 'required|numeric|min:1|max:16',
         'bedrooms' => 'required|numeric|min:0|max:50',
+        'beds' => 'required|numeric|min:0|max:50',
         'bathrooms' => 'required|numeric|min:0|max:50',
         'listing_headline' => 'required|min:1|max:500',
         'listing_desc' => 'required',
@@ -65,6 +67,7 @@ class NewPropertyForm extends Component
         $this->type = "house";
         $this->guests = 6;
         $this->bedrooms = 2;
+        $this->beds = 3;
         $this->bathrooms = 1.5;
         $this->listing_headline = "Listing Head";
         $this->listing_desc = "This is the listing description with long text";
@@ -94,6 +97,7 @@ class NewPropertyForm extends Component
             $property->type = $this->type;
             $property->guests = $this->guests;
             $property->bedrooms = $this->bedrooms;
+            $property->beds = $this->beds;
             $property->bathrooms = $this->bathrooms;
             $property->listing_headline = $this->listing_headline;
             $property->listing_desc = $this->listing_desc;

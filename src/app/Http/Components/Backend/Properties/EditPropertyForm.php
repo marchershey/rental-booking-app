@@ -25,6 +25,7 @@ class EditPropertyForm extends Component
     public $type;
     public $guests;
     public $bedrooms;
+    public $beds;
     public $bathrooms;
     public $listing_headline;
     public $listing_desc;
@@ -44,6 +45,7 @@ class EditPropertyForm extends Component
         'type' => 'required|alpha',
         'guests' => 'required|numeric|min:1|max:16',
         'bedrooms' => 'required|numeric|min:0|max:50',
+        'beds' => 'required|numeric|min:0|max:50',
         'bathrooms' => 'required|numeric|min:0|max:50',
         'listing_headline' => 'required|min:1|max:500',
         'listing_desc' => 'required',
@@ -65,7 +67,6 @@ class EditPropertyForm extends Component
 
     public function loadProperty()
     {
-        // sleep(5);
         $this->property = Property::firstWhere('id', $this->propertyId);
         $this->address = $this->property->address;
         $this->unit = $this->property->unit;
@@ -75,6 +76,7 @@ class EditPropertyForm extends Component
         $this->type = $this->property->type;
         $this->guests = $this->property->guests;
         $this->bedrooms = $this->property->bedrooms;
+        $this->beds = $this->property->beds;
         $this->bathrooms = $this->property->bathrooms;
         $this->listing_headline = $this->property->listing_headline;
         $this->listing_desc = $this->property->listing_desc;
@@ -109,6 +111,8 @@ class EditPropertyForm extends Component
     {
         $this->validate();
 
+        // dd($this->bedrooms);
+
         try {
             $property = Property::find($this->property->id);
             $property->address = $this->address;
@@ -119,6 +123,7 @@ class EditPropertyForm extends Component
             $property->type = $this->type;
             $property->guests = $this->guests;
             $property->bedrooms = $this->bedrooms;
+            $property->beds = $this->beds;
             $property->bathrooms = $this->bathrooms;
             $property->listing_headline = $this->listing_headline;
             $property->listing_desc = $this->listing_desc;

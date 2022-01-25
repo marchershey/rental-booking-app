@@ -7,8 +7,7 @@
                 <x-form.text-field wireId="address" title="Address" placeholder="1834 Wake Forest Rd" class="col-span-8" />
                 <x-form.text-field wireId="unit" title="Unit" placeholder="1A" optional class="col-span-4" />
                 <x-form.text-field wireId="city" title="City" placeholder="Winston-Salem" class="col-span-12" />
-                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." class="col-span-8" default="AK"
-                    :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
+                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." class="col-span-8" default="AK" :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
                 <x-form.text-field wireId="zip" title="Zip" placeholder="27109" class="col-span-4" />
             </div>
         </x-base.div-box>
@@ -18,7 +17,8 @@
             <div class="space-y-5">
                 <x-form.dropdown wireId="type" title="Property Type" placeholder="Select a type..." :options="['house' => 'House', 'apartment' => 'Apartment', 'other' => 'Other', ]" />
                 <x-form.ticker wireId="guests" title="Guests" desc="Amount of guests your property can house" default="1" min="1" max="16" />
-                <x-form.ticker wireId="bedrooms" title="Bedrooms" desc="Number of bedrooms your property has" default="0" min="0" />
+                <x-form.ticker wireId="bedrooms" title="Bedrooms" desc="Number of bedrooms your property has" default="1" min="0" />
+                <x-form.ticker wireId="beds" title="beds" desc="Number of beds your property has" default="1" min="0" />
                 <x-form.ticker wireId="bathrooms" title="Bathrooms" desc="Number of bathrooms your property has" default="0" min="0" step="0.5" />
             </div>
         </x-base.div-box>
