@@ -1,11 +1,11 @@
 <x-layouts.base>
 
-    <div class="space-y-10 text-gray-600 bg-white">
+    <div class="space-y-10 text-gray-600">
         {{ $slot }}
     </div>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <footer class="bg-white">
+    <footer class="mt-10 bg-white">
         <div class="max-w-7xl sm:px-6 lg:px-8 px-4 py-12 mx-auto overflow-hidden">
             <nav class="text-muted flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
                 <div class="px-5 py-2">

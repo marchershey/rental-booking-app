@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Components\Properties;
+namespace App\Http\Components\Backend\Properties;
 
 use App\Models\Property;
 use Illuminate\Support\Facades\Auth;

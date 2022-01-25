@@ -24,12 +24,20 @@ module.exports = {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+            lineClamp: {
+                7: '7',
+                8: '8',
+                9: '9',
+                10: '10',
+            }
         },
     },
 
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/line-clamp'),
+
 
         // ...
     ],
