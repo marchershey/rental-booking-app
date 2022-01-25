@@ -1,5 +1,5 @@
 {{--  --}}
-<div class="flex items-center justify-between space-x-5" x-data="{{ $wireId }}_ticker()" x-init="start()">
+<div class="flex items-center justify-between space-x-5" x-data="{{ $wireId }}_ticker()">
     <div>
         <label class="block font-medium @error($wireId) text-red-500 @enderror">{{ $title }}</label>
         <p class="text-muted text-xs">{{ $desc }}</p>
@@ -40,11 +40,6 @@
             subtractDisabled() {
                 return this.value <= this.min
             },
-            start() {
-                this.value = (this.value == null) ? {{ $default }} : this.value
-            },
-
-
         }))
     })
 </script>
