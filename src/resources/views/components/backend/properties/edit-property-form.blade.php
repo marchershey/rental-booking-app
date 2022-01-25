@@ -137,10 +137,16 @@
             </div>
         @endif
 
-        <div>
+        <div class="pb-10 space-y-10">
             <button wire:click.prevent="submit" type="button" class="disabled:bg-gray-400 w-full px-3 py-2 space-x-2 font-medium leading-6 text-white bg-blue-600 rounded" @if ($errors->any()) disabled @endif>
                 <span>Save Property</span>
             </button>
+            <div>
+
+                <button x-on:click="(confirm('Press OK to delete this property.')) ? $wire.delete() : ''" type="button" class="disabled:bg-gray-400 w-full px-3 py-2 space-x-2 font-medium leading-6 text-red-500 bg-transparent rounded" @if ($errors->any()) disabled @endif>
+                    <span>Delete Property</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>

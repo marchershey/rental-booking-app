@@ -94,12 +94,14 @@ class EditPropertyForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function removeUploadedPhoto(Photo $photo)
+    public function removeUploadedPhoto(Photo $photo, $notification = true)
     {
         Storage::delete('public/' . $photo->path); // delete file
         $photo->delete(); // delete in db
         $this->loadProperty(); // refresh property
-        toast()->success('Photo deleted successfully')->push();
+        if($notification){
+            toast()->success('Photo deleted successfully')->push();
+        }
     }
 
     public function removeStagedPhoto($key)
@@ -156,6 +158,22 @@ class EditPropertyForm extends Component
         }
 
         toast()->success('Your property was updated.')->pushOnNextPage();
+        return redirect()->route('dashboard.properties.index');
+    }
+
+    public function delete()
+    {
+        // delete photos
+        foreach($this->property->photos as $photo){
+            $this->removeUploadedPhoto($photo, false);
+        }
+
+        // delete listing
+        $this->property->delete();
+
+        // create notificaiton
+        toast()->success('Your property was successfully deleted!')->pushOnNextPage();
+
         return redirect()->route('dashboard.properties.index');
     }
 }
