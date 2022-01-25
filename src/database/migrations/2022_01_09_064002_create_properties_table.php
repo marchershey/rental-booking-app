@@ -23,6 +23,7 @@ class CreatePropertiesTable extends Migration
             $table->string('type')->nullable();
             $table->string('guests')->nullable();
             $table->string('bedrooms')->nullable();
+            $table->string('beds')->nullable();
             $table->string('bathrooms')->nullable();
             $table->string('listing_headline')->nullable();
             $table->text('listing_desc')->nullable();
