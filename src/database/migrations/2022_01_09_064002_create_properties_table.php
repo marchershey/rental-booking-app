@@ -27,8 +27,8 @@ class CreatePropertiesTable extends Migration
             $table->float('bathrooms', 3, 1)->nullable();
             $table->string('listing_headline')->nullable();
             $table->text('listing_desc')->nullable();
-            $table->string('listing_rating')->nullable()->default('0.0');
-            $table->string('listing_rating_count')->nullable()->default('0');
+            $table->string('listing_rating')->default('0.0');
+            $table->string('listing_rating_count')->default('0');
             $table->boolean('visible')->default(true)->nullable();
             $table->boolean('deleted')->default(false)->nullable();
             $table->integer('user_id')->nullable();
