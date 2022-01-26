@@ -45,7 +45,7 @@
                         <div wire:loading.remove wire:target="stagedPhotos" class="text-muted text-xs">
                             Max 30 photos, 20MB
                         </div>
-                        <div class="bg-blue-50 relative w-full h-5 overflow-hidden rounded-full" wire:loading wire:target="photos">
+                        <div class="bg-blue-50 relative w-full h-5 overflow-hidden rounded-full" wire:loading wire:target="stagedPhotos">
                             <div class="whitespace-nowrap absolute p-1 text-xs font-medium leading-none text-center text-white bg-blue-600 rounded-l-full" :style="{ 'width': progress + '%'}"> <span x-text="progress" class=""></span> %</div>
                         </div>
                     </div>
