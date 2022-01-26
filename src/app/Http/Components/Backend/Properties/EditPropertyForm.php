@@ -80,6 +80,8 @@ class EditPropertyForm extends Component
         $this->bathrooms = $this->property->bathrooms;
         $this->listing_headline = $this->property->listing_headline;
         $this->listing_desc = $this->property->listing_desc;
+        $this->listing_rating = $this->property->listing_rating;
+        $this->listing_rating_count = $this->property->listing_rating_count;
         $this->uploadedPhotos = $this->property->photos->toArray();
     }
 
