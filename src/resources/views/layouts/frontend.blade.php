@@ -1,7 +1,15 @@
 <x-layouts.base>
-    @include('layouts.frontend-nav')
-    <div class="space-y-10 text-gray-600">
-        {{ $slot }}
+    <div class="relative">
+        @hasSection('navbar')
+            @include('layouts.frontend-nav')
+        @else
+            <x-slot name="navbar">
+                Server Error
+            </x-slot>
+        @endif
+        <div>
+            {{ $slot }}
+        </div>
+        @include('layouts.frontend-footer')
     </div>
-    @include('layouts.frontend-footer')
 </x-layouts.base>

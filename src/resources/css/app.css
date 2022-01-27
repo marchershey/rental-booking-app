@@ -11,3 +11,7 @@
     /* Fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
 }
+
+.contain {
+    @apply sm:px-6 lg:px-8 max-w-screen-lg p-5 mx-auto;
+}

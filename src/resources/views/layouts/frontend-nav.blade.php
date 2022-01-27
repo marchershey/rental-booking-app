@@ -1,5 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="mb-10 bg-gray-800" x-data="{mobileNavOpen: false}">
+<nav class="bg-gray-800" x-data="{mobileNavOpen: false}">
     <div class="sm:px-6 lg:px-8 max-w-screen-lg px-4 mx-auto">
         <div class="flex items-center justify-between h-16">
             <div class="flex-shrink-0">

@@ -1,4 +1,4 @@
-<footer class="mt-10 bg-white">
+<footer class="bg-white">
     <div class="max-w-7xl sm:px-6 lg:px-8 px-4 py-12 mx-auto overflow-hidden">
         <nav class="text-muted flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
             <div class="px-5 py-2">

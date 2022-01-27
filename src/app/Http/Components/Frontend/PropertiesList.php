@@ -17,6 +17,5 @@ class PropertiesList extends Component
     public function loadProperties()
     {
         $this->properties = Property::all();
-        // dd($this->properties[0]->photos);
     }
 }
