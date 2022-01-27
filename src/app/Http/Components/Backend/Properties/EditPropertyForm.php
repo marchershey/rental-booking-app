@@ -49,7 +49,7 @@ class EditPropertyForm extends Component
         'bathrooms' => 'required|numeric|min:0|max:50',
         'listing_headline' => 'required|min:1|max:500',
         'listing_desc' => 'required',
-        'listing_rating' => 'nullable|numeric|min:1|max:5',
+        'listing_rating' => 'nullable|numeric|between:0.0,5.0',
         'listing_rating_count' => 'nullable|numeric|min:0',
         'stagedPhotos' => 'nullable|max:12288',
         'stagedPhotos.*' => 'nullable|image'
@@ -80,7 +80,7 @@ class EditPropertyForm extends Component
         $this->bathrooms = $this->property->bathrooms;
         $this->listing_headline = $this->property->listing_headline;
         $this->listing_desc = $this->property->listing_desc;
-        $this->listing_rating = $this->property->listing_rating;
+        $this->listing_rating = number_format($this->property->listing_rating, 1);
         $this->listing_rating_count = $this->property->listing_rating_count;
         $this->uploadedPhotos = $this->property->photos->toArray();
     }
