@@ -104,8 +104,8 @@ class NewPropertyForm extends Component
             $property->bathrooms = $this->bathrooms;
             $property->listing_headline = $this->listing_headline;
             $property->listing_desc = $this->listing_desc;
-            $property->listing_rating = $this->listing_rating;
-            $property->listing_rating_count = $this->listing_rating_count;
+            $property->listing_rating = $this->listing_rating ?? 0;
+            $property->listing_rating_count = $this->listing_rating_count ?? 0;
             $property->user_id = Auth::user()->id;
             $property->save();
 
