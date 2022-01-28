@@ -170,7 +170,6 @@
                         <button wire:click="{{ $step }}" type="button" class="bg-primary hover:bg-primary-darker w-full py-3 font-bold text-center text-white rounded">Continue</button>
                     </div>
                 </div>
-
             </x-base.div-box>
         </div>
     </div>
