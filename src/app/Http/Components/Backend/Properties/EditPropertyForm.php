@@ -131,7 +131,7 @@ class EditPropertyForm extends Component
             $property->bathrooms = $this->bathrooms;
             $property->listing_headline = $this->listing_headline;
             $property->listing_desc = $this->listing_desc;
-            $property->listing_rating = $this->listing_rating;
+            $property->listing_rating = number_format($this->listing_rating, 1);
             $property->listing_rating_count = $this->listing_rating_count;
             $property->user_id = Auth::user()->id;
             $property->save();

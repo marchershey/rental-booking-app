@@ -1,23 +1,39 @@
 <div class="" wire:init="loadProperties">
     @if ($properties)
-        <ul role="list" class="flex flex-col gap-10">
-            @foreach ($properties as $property)
+        <ul role="list" class="flex flex-col gap-5">
+            @foreach ($properties as $key => $property)
                 <li class="overflow-hidden bg-white rounded shadow-lg">
                     <div class="sm:grid-cols-5 grid grid-cols-1">
-
-                        <div class="grid grid-cols-2 col-span-2 gap-2">
-                            <div class="col-span-2">
-                                <img class="sm:rounded-br" src="/storage/{{ $property->photos->first()->path }}" alt="">
+                        <div class="col-span-2">
+                            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper{{ $key }}">
+                                <div class="swiper-wrapper">
+                                    @foreach ($property->photos as $photo)
+                                        <div class="swiper-slide">
+                                            <img class="swiper-lazy" data-src="/storage/{{ $property->photos->first()->path }}" alt="">
+                                            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @if (count($property->photos) > 1)
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                @endif
+                                <div class="swiper-pagination"></div>
                             </div>
-                            @if ($property->photos->has([1, 2]))
-                                <div>
-                                    <img class="sm:rounded-br-none rounded-r" src="/storage/{{ $property->photos[1]->path }}" alt="">
-                                </div>
-                                <div>
-                                    <img class="sm:rounded-t sm:rounded-bl-none rounded-l" src="/storage/{{ $property->photos[2]->path }}" alt="">
-                                </div>
-                            @endif
                         </div>
+                        <script>
+                            var swiper{{ $key }} = new Swiper(".mySwiper{{ $key }}", {
+                                lazy: true,
+                                pagination: {
+                                    el: ".swiper-pagination",
+                                    clickable: true,
+                                },
+                                navigation: {
+                                    nextEl: ".swiper-button-next",
+                                    prevEl: ".swiper-button-prev",
+                                },
+                            });
+                        </script>
 
                         <div class="w-full col-span-3 p-5">
                             <div class="flex flex-col justify-between h-full space-y-5">
@@ -35,7 +51,7 @@
                                 </div>
                                 <div class="flex items-end h-full">
                                     <button class="hover:text-primary w-full py-3 font-bold bg-white">View Property</button>
-                                    <button class="bg-primary hover:bg-primary-darker w-full py-3 font-bold text-white rounded">Book Now</button>
+                                    <a href="{{ route('frontend.reserve', $property->id) }}" class="bg-primary hover:bg-primary-darker w-full py-3 font-bold text-center text-white rounded">Book Now</a>
                                 </div>
                             </div>
                         </div>

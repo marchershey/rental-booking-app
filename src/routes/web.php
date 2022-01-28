@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('frontend.')->group(function () {
     Route::view('/', 'pages.frontend.index')->name('index');
     Route::view('/properties', 'pages.frontend.properties')->name('properties');
+    Route::get('/property/{property}/reserve', [\App\Http\Controllers\PropertiesController::class, 'reserveProperty'])->name('reserve');
 });
 
 // Dashboard
