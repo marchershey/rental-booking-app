@@ -105,6 +105,7 @@ class NewPropertyForm extends Component
             $property->listing_headline = $this->listing_headline;
             $property->listing_desc = $this->listing_desc;
             $property->listing_rating = number_format($this->listing_rating, 1) ?? 0.0;
+            $property->listing_rating = $this->listing_rating ?? 0.0;
             $property->listing_rating_count = $this->listing_rating_count ?? 0;
             $property->user_id = Auth::user()->id;
             $property->save();
