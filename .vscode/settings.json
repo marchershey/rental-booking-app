@@ -1,13 +1,20 @@
 {
-    "terminal.integrated.defaultProfile.linux": "bash",
-    "editor.defaultFormatter": "HookyQR.beautify",
-    "editor.formatOnSave": true,
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
 
-    // blade
-    "blade.format.enable": true,
-    "bladeFormatter.format.wrapLineLength": 9999,
-    "[blade]": {
-        "editor.defaultFormatter": "shufo.vscode-blade-formatter"
-    },
-    "headwind.prependCustomClasses": true,
+  // blade
+  "blade.format.enable": true,
+  "bladeFormatter.format.wrapLineLength": 9999,
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+  },
+  "headwind.prependCustomClasses": true,
+  //git
+  "git.enableCommitSigning": true,
+  "git.enableSmartCommit": true,
+  "git.autoStash": true,
+  "git.autofetch": true,
+  "git.fetchOnPull": true,
+  "git.showPushSuccessNotification": true
 }
