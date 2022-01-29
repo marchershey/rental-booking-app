@@ -5,12 +5,14 @@
                 <li class="overflow-hidden bg-white rounded shadow-lg">
                     <div class="sm:grid-cols-5 grid grid-cols-1">
                         <div class="col-span-2">
-                            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper{{ $key }}">
+                            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper{{ $key }} bg-gray-200">
                                 <div class="swiper-wrapper">
                                     @foreach ($property->photos as $photo)
                                         <div class="swiper-slide">
-                                            <img class="swiper-lazy" data-src="/storage/{{ $property->photos->first()->path }}" alt="">
-                                            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                                            <div class="">
+                                                {{-- <div class="bg-center bg-cover" style="background-image: url('/storage/{{ $photo->path }}')" alt=""></div> --}}
+                                                <img class="h-72 object-fill w-full" src="/storage/{{ $photo->path }}" alt="" />
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -23,7 +25,9 @@
                         </div>
                         <script>
                             var swiper{{ $key }} = new Swiper(".mySwiper{{ $key }}", {
-                                lazy: true,
+                                autoHeight: true,
+                                loop: true,
+                                effect: 'coverflow',
                                 pagination: {
                                     el: ".swiper-pagination",
                                     clickable: true,
