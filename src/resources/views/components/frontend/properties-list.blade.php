@@ -40,7 +40,7 @@
                                 <div class="flex flex-col gap-5">
                                     <div>
                                         <h1 class="line-clamp-2 text-2xl font-semibold">{{ $property->listing_headline }}</h1>
-                                        <p class="text-muted line-clamp-7 mt-2">{{ $property->listing_desc }}</p>
+                                        <p class="text-muted line-clamp-2 mt-2">{{ $property->listing_desc }}</p>
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-1">
                                         <div class="px-2 py-1 text-xs bg-gray-200 rounded">{{ $property->guests }} guests</div>
