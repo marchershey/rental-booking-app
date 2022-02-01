@@ -23,6 +23,10 @@
         "@tailwindcss/forms": "^0.4.0",
         "@tailwindcss/line-clamp": "^0.3.1",
         "alpinejs": "^3.7.1",
+        "cleave.js": "^1.6.0",
+        "flatpickr": "^4.6.9",
+        "moment": "^2.29.1",
+        "stripe": "^8.201.0",
         "swiper": "^7.4.1"
     }
 }

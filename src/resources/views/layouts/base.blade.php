@@ -16,6 +16,7 @@
     @livewireScripts
     @toastScripts
     <script src="{{ asset('js/app.js') }}?{{ rand() }}"></script>
+    @stack('scripts')
 </head>
 
 <body class="touch-manipulation relative h-full">
@@ -31,6 +32,7 @@
     </div>
     <!-- container -->
     <div> {{ $slot }} </div>
+
 </body>
 
 </html>

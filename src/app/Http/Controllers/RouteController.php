@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 
-class PropertiesController extends Controller
+class RouteController extends Controller
 {
 
+    // Frontend
     public function reserveProperty(Request $request, Property $property) {
         return view('pages.frontend.reserve', ['propertyId' => $property->id]);
     }
+    public function checkout(Request $request, $code)
+    {
+        return view('pages.frontend.checkout', ['code' => $code]);
+    }
 
+    // Backend
     public function createProperty(Request $request) {
         return $request;
     }

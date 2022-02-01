@@ -9,7 +9,12 @@ class Property extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
+
+    public function trip()
+    {
+        return $this->hasOne(Trip::class);
+    }
 
     /**
      * Get the photos for the property.

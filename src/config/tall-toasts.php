@@ -4,7 +4,7 @@ return [
     /*
      * How long each toast will be displayed before fading out, in ms
      */
-    'duration' => 4500,
+    'duration' => 10000,
 
     /*
      * How long to wait before displaying the toasts after page loads, in ms

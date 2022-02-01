@@ -12,6 +12,28 @@
     height: calc(var(--vh, 1vh) * 100);
 }
 
+.min-full-screen {
+    min-height: 100vh;
+    /* Fallback for browsers that do not support Custom Properties */
+    min-height: calc(var(--vh, 1vh) * 100);
+}
+
 .contain {
     @apply sm:px-6 lg:px-8 max-w-screen-lg p-5 mx-auto;
+}
+
+@import "~flatpickr/dist/flatpickr.min.css";
+@layer components {
+    .flatpickr-calendar {
+        @apply w-full !important;
+    }
+    .flatpickr-day.today:not(.flatpickr-day.selected) {
+        @apply border-0 border-b-2 rounded-none !important;
+    }
+    .flatpickr-calendar.open {
+        @apply z-10 !important;
+    }
+    .flatpickr-day.nextMonthDay {
+        color: #c4c4c4 !important;
+    }
 }

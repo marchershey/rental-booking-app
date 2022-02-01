@@ -7,7 +7,7 @@
                 Server Error
             </x-slot>
         @endif
-        <div>
+        <div class="min-full-screen">
             {{ $slot }}
         </div>
         @include('layouts.frontend-footer')

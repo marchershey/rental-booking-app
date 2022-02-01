@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
         $user->first_name = "Demo";
         $user->last_name = "User";
         $user->email = "demo@hershey.co";
-        $user->email_verified_at = now();
+        $user->birthdate = today();
         $user->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'; // password
-        $user->remember_token = Str::random(10);
+        // $user->remember_token = Str::random(10);
+        // $user->email_verified_at = now();
         $user->save();
 
         \App\Models\User::factory(10)->create();

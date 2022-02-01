@@ -19,7 +19,7 @@ class Ticker extends Component
      *
      * @return void
      */
-    public function __construct($title, $desc, $default = 1, $step = 1, $min = 0, $max = 50, $wireId = "")
+    public function __construct($title, $desc = "", $default = 1, $step = 1, $min = 0, $max = 50, $wireId = "")
     {
         $this->title = $title;
         $this->desc = $desc;
