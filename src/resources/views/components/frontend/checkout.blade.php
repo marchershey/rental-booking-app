@@ -106,22 +106,24 @@
                             <h2 class="text-xl font-medium">Billing Details</h2>
                             <p class="text-muted text-xs">Enter your billings details below.</p>
                         </div>
-                        <form wire:submit.prevent="saveUserBillingInfo">
-                            <div class="md:grid-cols-12 grid grid-cols-1 gap-3">
-                                <x-form.text-field wireId="email" title="Email Address" placeholder="email@domain.com" disabled class="md:col-span-12" />
-                                <x-form.text-field wireId="first_name" title="First name" placeholder="John" disabled class="md:col-span-4" />
-                                <x-form.text-field wireId="last_name" title="Last name" placeholder="Smith" disabled class="md:col-span-4" />
-                                <x-form.text-field wireId="phone" title="Phone Number" placeholder="555-555-5555" class="md:col-span-4" inputClass="mask-phone" />
-                                <x-form.text-field wireId="address" title="Street Address" placeholder="1600 Pennsylvania Avenue" class="md:col-span-10" />
-                                <x-form.text-field wireId="unit" title="Unit" placeholder="1A" class="md:col-span-2" />
-                                <x-form.text-field wireId="city" title="City" placeholder="Washington" class="md:col-span-5" />
-                                <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." default="AK" class="md:col-span-4" :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
-                                <x-form.text-field wireId="zip" title="Zip" placeholder="20500" class="md:col-span-3" inputClass="mask-zip" />
-                                <div class="col-span-full">
-                                    <button type="submit" class="bg-primary hover:bg-primary-darker w-full px-2 py-3 font-bold text-white rounded">Continue</button>
+                        <div x-show="!showCreditCardField">
+                            <form wire:submit.prevent="saveUserBillingInfo">
+                                <div class="md:grid-cols-12 grid grid-cols-1 gap-3">
+                                    <x-form.text-field wireId="email" title="Email Address" placeholder="email@domain.com" disabled class="md:col-span-12" />
+                                    <x-form.text-field wireId="first_name" title="First name" placeholder="John" disabled class="md:col-span-4" />
+                                    <x-form.text-field wireId="last_name" title="Last name" placeholder="Smith" disabled class="md:col-span-4" />
+                                    <x-form.text-field wireId="phone" title="Phone Number" placeholder="555-555-5555" class="md:col-span-4" inputClass="mask-phone" />
+                                    <x-form.text-field wireId="address" title="Street Address" placeholder="1600 Pennsylvania Avenue" class="md:col-span-10" />
+                                    <x-form.text-field wireId="unit" title="Unit" placeholder="1A" class="md:col-span-2" />
+                                    <x-form.text-field wireId="city" title="City" placeholder="Washington" class="md:col-span-5" />
+                                    <x-form.dropdown wireId="state" title="State" placeholder="Select a state..." default="AK" class="md:col-span-4" :options="['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming']" />
+                                    <x-form.text-field wireId="zip" title="Zip" placeholder="20500" class="md:col-span-3" inputClass="mask-zip" />
+                                    <div class="col-span-full">
+                                        <button type="submit" class="bg-primary hover:bg-primary-darker w-full px-2 py-3 font-bold text-white rounded">Continue</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
 
                         <script>
                             window.maskPhoneNumbers();
