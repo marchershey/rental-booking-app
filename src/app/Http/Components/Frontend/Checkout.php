@@ -118,6 +118,11 @@ class Checkout extends Component
             return;
         }
 
+        // let's now create a PaymentIntent
+        
+
+        // show credit card field
+        $this->showCreditCardField = true;
 
 
 
@@ -129,13 +134,13 @@ class Checkout extends Component
     {
         $user = User::find($this->user->id);
         $user->email = $this->email;
-        $user->first_name = $this->first_name;
-        $user->last_name = $this->last_name;
+        $user->first_name = ucwords($this->first_name);
+        $user->last_name = ucwords($this->last_name);
         $user->phone = $this->phone;
         $user->birthdate = $this->birthdate;
-        $user->address = $this->address;
-        $user->unit = $this->unit;
-        $user->city = $this->city;
+        $user->address = ucwords($this->address);
+        $user->unit = strtoupper($this->unit);
+        $user->city = ucwords($this->city);
         $user->state = $this->state;
         $user->zip = $this->zip;
         return ($user->save()) ? true : false;
@@ -169,6 +174,10 @@ class Checkout extends Component
             // user is NOT a stripe customer
             $this->stripe_user = $this->user->createAsStripeCustomer($stripe_user_data);
         }
+
+        // do some validation here!!!
+        // there's no return false, so how can we tell it failed?
+        return true;
     }
 
     //////////////////////////////////////////////
