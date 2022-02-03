@@ -36,6 +36,15 @@ class Checkout extends Component
     // stripe data
     protected $stripe_user;
     public $client_secret;
+    public $payment_intent;
+
+    // prices
+    public $rate_per_night;
+    public $number_of_nights;
+    public $base_cost;
+    public $cleaning_fee;
+    public $tax;
+    public $total_cost;
 
     public function render()
     {
@@ -64,8 +73,20 @@ class Checkout extends Component
         $this->trip = Trip::where('code', $this->checkoutCode)->first();
         $this->property = $this->trip->property;
 
+        $this->calulatePrices();
+
         // create or find stripe customer
         // create and save payment method
+    }
+
+    public function calulatePrices()
+    {
+        $this->rate_per_night = $this->trip->rate_per_night;
+        $this->number_of_nights = $this->trip->number_of_nights;
+        $this->base_cost = $this->rate_per_night * $this->number_of_nights;
+        $this->cleaning_fee = (isset($this->property->cleaning_fee) ? $this->property->cleaning_fee : config('settings.cleaning_fee'));
+        $this->service_fee = (config('settings.service_fee') / 100) * $this->base_cost;
+        $this->total_cost = ($this->base_cost + $this->cleaning_fee + $this->service_fee);
     }
 
     public function saveUserBillingInfo()
@@ -112,14 +133,26 @@ class Checkout extends Component
             $this->user = auth()->user();
         }
 
-        // create or update stripe user
-        if (!$this->createOrUpdateStripeUser()) {
-            toast()->danger('Our payment processor failed to return the correct data');
-            return;
-        }
+        // // create or update stripe user
+        // if (!$this->createOrUpdateStripeUser()) {
+        //     toast()->danger('Our payment processor failed to return the correct data');
+        //     return;
+        // }
+
+        // set up intent
+        // $this->intent = $this->user->
+        // dd($this->user->createSetupIntent());
 
         // let's now create a PaymentIntent
-        
+        // $this->user->createPayment
+        // $this->paymentIntent = $this->createPaymentIntent();
+
+
+
+
+
+
+
 
         // show credit card field
         $this->showCreditCardField = true;
@@ -146,7 +179,7 @@ class Checkout extends Component
         return ($user->save()) ? true : false;
     }
 
-    public function createOrUpdateStripeUser()
+    public function returnStripeUser()
     {
         $stripe_user_data = [
             'address' => [
@@ -175,9 +208,7 @@ class Checkout extends Component
             $this->stripe_user = $this->user->createAsStripeCustomer($stripe_user_data);
         }
 
-        // do some validation here!!!
-        // there's no return false, so how can we tell it failed?
-        return true;
+        return $this->stripe_user;
     }
 
     //////////////////////////////////////////////

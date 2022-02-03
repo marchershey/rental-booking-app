@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Settings;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Cashier\Cashier;
@@ -26,7 +28,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultstringLength(191);
-        // Cashier::calculateTaxes();
+
+        if (Schema::hasTable('settings')) {
+            foreach (Settings::all() as $setting) {
+                Config::set('settings.'.$setting->key, $setting->value);
+            }
+        }
 
     }
 }

@@ -40,6 +40,14 @@
         </x-base.div-box>
 
         <x-base.div-box>
+            <x-base.heading title="Pricing" desc="Set your pricing below" />
+            <div class="grid grid-cols-2 gap-5">
+                <x-form.text-field wireId="rate" title="Rate per night" desc="Enter the rate per night" placeholder="139.00" />
+                <x-form.text-field wireId="cleaning_fee" title="Cleaning Fee" desc="If the cleaning fee is different than the ${{ number_format(config('settings.cleaning_fee')) }} default, enter it above" placeholder="35.00" />
+            </div>
+        </x-base.div-box>
+
+        <x-base.div-box>
             <x-base.heading title="Photos" desc="Upload some of your photos of the property" />
             <div class="space-y-5">
                 <div x-data="{ progress: 0 }" x-on:livewire-upload-progress="progress = $event.detail.progress">

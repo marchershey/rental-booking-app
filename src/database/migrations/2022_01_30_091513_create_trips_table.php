@@ -28,6 +28,8 @@ class CreateTripsTable extends Migration
             $table->boolean('canceled')->default(false);
             $table->boolean('checked_in')->default(false);
             $table->boolean('checked_out')->default(false);
+            $table->string('rate_per_night');
+            $table->string('total_price');
             $table->timestamps();
         });
     }

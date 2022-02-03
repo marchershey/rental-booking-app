@@ -29,6 +29,8 @@ class CreatePropertiesTable extends Migration
             $table->text('listing_desc')->nullable();
             $table->float('listing_rating', 2, 1)->default('0.0');
             $table->string('listing_rating_count')->default('0');
+            $table->string('rate')->default('10000'); // price per day in cents
+            $table->string('cleaning_fee')->nullable();
             $table->boolean('visible')->default(true)->nullable();
             $table->boolean('deleted')->default(false)->nullable();
             $table->integer('user_id')->nullable();

@@ -29,6 +29,10 @@ class NewPropertyForm extends Component
     public $listing_desc;
     public $listing_rating;
     public $listing_rating_count;
+    public $rate;
+    public $cleaning_fee;
+    public $service_fee;
+
 
     public $stagedPhotos = [];
     public $maxPhotos = 30;
@@ -48,6 +52,8 @@ class NewPropertyForm extends Component
         'listing_desc' => 'required',
         'listing_rating' => 'nullable|numeric|between:0.0,5.0',
         'listing_rating_count' => 'nullable|numeric|min:0',
+        'rate' => 'required|numeric|min:1|max:9999',
+        'cleaning_fee' => 'nullable|numeric|min:0|max:9999',
         'stagedPhotos' => 'required|min:1',
         'stagedPhotos.*' => 'image|max:12288',
     ];
@@ -68,12 +74,16 @@ class NewPropertyForm extends Component
         // custom
         $this->address = "123 address ave";
         $this->unit = "1a";
-        $this->city = "lexington";
+        $this->city = "Burnside";
         $this->state = "KY";
         $this->zip = "10001";
         $this->type = "house";
-        $this->listing_headline = "Listing Head";
-        $this->listing_desc = "This is the listing description with long text";
+        $this->listing_headline = "Work from Lake, Fast Internet, Weekly Discount, Kid Friendly, Private Resort";
+        $this->listing_desc = "Beautiful lake view nestled in the heart of the Daniel Boone National Forest by Lake Cumberland! Spacious 3 bedroom home with bonus basement sleeping area has large hot tub under screened in, covered porch and is located in a private gated resort community with multiple pools, tennis courts, walking/ATV trails- all within 1 mile of a boat ramp. New furniture with new TVs in every bedroom, basement game room with bar and poker table, jacuzzi in master bedroom.";
+        $this->rate = "379";
+        $this->listing_rating = 4.9;
+        $this->listing_rating_count = 30;
+        $this->cleaning_fee = null;
     }
 
     public function updated($propertyName)
@@ -106,6 +116,8 @@ class NewPropertyForm extends Component
             $property->listing_desc = $this->listing_desc;
             $property->listing_rating = number_format($this->listing_rating, 1) ?? 0.0;
             $property->listing_rating_count = $this->listing_rating_count ?? 0;
+            $property->rate = $this->rate ?? 0;
+            $property->cleaning_fee ?? 0;
             $property->user_id = Auth::user()->id;
             $property->save();
 

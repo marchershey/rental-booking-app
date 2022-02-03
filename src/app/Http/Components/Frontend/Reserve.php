@@ -240,6 +240,8 @@ class Reserve extends Component
         $trip->adults = $this->adults;
         $trip->children = $this->children;
         $trip->guests = $this->adults + $this->children;
+        $trip->rate_per_night = $this->property->rate;
+        $trip->total_price = number_format($this->property->rate * $number_of_nights, 2);
         $trip->save();
         return redirect()->route('frontend.trip.checkout', ['code' => $trip->code]);
     }

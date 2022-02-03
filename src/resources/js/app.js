@@ -7,9 +7,9 @@ import Alpine from "alpinejs";
 import ToastComponent from "../../vendor/usernotnull/tall-toasts/dist/js/tall-toasts";
 Alpine.data("ToastComponent", ToastComponent);
 window.Alpine = Alpine;
-window.addEventListener("load", function () {
-    Alpine.start();
-});
+// window.addEventListener("load", function () {
+Alpine.start();
+// });
 
 // import Swiper JS
 import Swiper from "swiper/bundle";
@@ -25,12 +25,12 @@ import moment from "moment";
 window.moment = moment;
 
 // cleave.js v1.6.0
-import cleave from "cleave.js";
+import cleave, { Cleave } from "cleave.js";
 import cleavePhone from "cleave.js/dist/addons/cleave-phone.us";
 window.cleave = cleave;
 window.maskPhoneNumbers = function () {
     document.querySelectorAll(".mask-phone").forEach((element) => {
-        new Cleave(element, {
+        new window.cleave(element, {
             phone: true,
             phoneRegionCode: "us",
             delimiter: "-",
@@ -39,7 +39,7 @@ window.maskPhoneNumbers = function () {
 };
 window.maskZipCodes = function () {
     document.querySelectorAll(".mask-zip").forEach((element) => {
-        new Cleave(element, {
+        new window.cleave(element, {
             blocks: [5],
             numericOnly: true,
         });

@@ -47,19 +47,25 @@
                         <div>
                             <dl class="md:text-base text-sm divide-y divide-gray-100">
 
+                                <div class="justify-evenly flex items-center mb-5">
+                                    <div class="text-2xl font-bold">{{ \Carbon\Carbon::parse($trip->check_in_date)->format('M jS') }}</div>
+                                    <div class="text-muted">to</div>
+                                    <div class="text-2xl font-bold">{{ \Carbon\Carbon::parse($trip->check_out_date)->format('M jS') }}</div>
+                                </div>
+
                                 <div class="flex justify-between py-2">
-                                    <dt class="font-medium">$389 x 4 nights</dt>
-                                    <dd class="text-muted">$1,200.00</dd>
+                                    <dt class="font-medium">${{ $rate_per_night }} x {{ $number_of_nights }} nights</dt>
+                                    <dd class="text-muted">${{ number_format($base_cost, 2) }}</dd>
                                 </div>
                                 <div class="flex justify-between py-2">
                                     <dt class="font-medium">Cleaning Fee</dt>
-                                    <dd class="text-muted">$175.00</dd>
+                                    <dd class="text-muted">${{ number_format($cleaning_fee, 2) }}</dd>
                                 </div>
                                 <div class="flex justify-between py-2">
                                     <dt class="font-medium">Service Fee</dt>
-                                    <dd class="text-muted">$25.00</dd>
+                                    <dd class="text-muted">${{ number_format($service_fee, 2) }}</dd>
                                 </div>
-                                <div x-data="{show: false}">
+                                <div x-data="{show: false}" class="hidden">
                                     <div class="flex justify-between pt-2" x-on:click="show = !show">
                                         <dt class="font-medium">
                                             <div class="flex items-center">
@@ -85,6 +91,10 @@
                                         </div>
 
                                     </div>
+                                </div>
+                                <div class="flex justify-between py-2 text-lg font-medium">
+                                    <dt class="">Total</dt>
+                                    <dd class="">${{ number_format($total_cost, 2) }}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -131,7 +141,7 @@
                         </script>
 
                         <div x-show="showCreditCardField" x-cloak>
-                            <div wire:ignore>
+                            {{-- <div wire:ignore>
                                 <div class="md:col-span-1 w-full col-span-2">
                                     <div class="flex items-center justify-between">
                                         <label class="block font-medium">City</label>
@@ -143,38 +153,79 @@
                                 <button id="card-button">
                                     Process Payment
                                 </button>
-                            </div>
+                            </div> --}}
+
+                            <form id="payment-form">
+                                <div id="payment-element">
+                                    <!--Stripe.js injects the Payment Element-->
+                                </div>
+                                <button id="submit">
+                                    <div class="spinner hidden" id="spinner"></div>
+                                    <span id="button-text">Pay now</span>
+                                </button>
+                                <div id="payment-message" class="hidden"></div>
+                            </form>
 
                             <script>
-                                const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+                                window.addEventListener("load", function() {
+                                    const stripe = Stripe("{{ env('STRIPE_KEY') }}");
 
-                                const elements = stripe.elements();
-                                const cardElement = elements.create('card');
+                                    let elements;
 
-                                cardElement.mount('#card-element');
+                                    initialize();
+                                    // checkStatus();
 
-                                const cardHolderName = document.getElementById('card-holder-name');
-                                const cardButton = document.getElementById('card-button');
+                                    document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
 
-                                cardButton.addEventListener('click', async (e) => {
-                                    const {
-                                        paymentMethod,
-                                        error
-                                    } = await stripe.createPaymentMethod(
-                                        'card', cardElement, {
-                                            billing_details: {
-                                                name: "@js($user->fullName())"
-                                            }
-                                        }
-                                    );
+                                    async function initialize() {
 
-                                    if (error) {
-                                        console.log(error);
-                                        Toast.danger(error.message)
-                                    } else {
-                                        @this.processPayment(paymentMethod);
+                                        const customer = await $wire.returnStripeUser();
+
+                                        console.log(customer.client_secret);
+                                    }
+
+                                    async function handleSubmit(e) {
+
                                     }
                                 });
+
+                                /////////////////////
+
+
+                                // const elements = stripe.elements();
+                                // const cardElement = elements.create('card');
+
+                                // cardElement.mount('#card-element');
+                                // const cardButton = document.getElementById('card-button');
+
+                                // cardButton.addEventListener('click', async (e) => {
+
+                                //     const intent = @this.createSetupIntent();
+                                //     console.log(intent);
+
+                                //     // const {
+                                //     //     setupIntent,
+                                //     //     error
+                                //     // } = await stripe.confirmCardSetup(
+                                //     //     clientSecret, {
+                                //     //         payment_method: {
+                                //     //             card: cardElement,
+                                //     //             billing_details: {
+                                //     //                 name: cardHolderName.value
+                                //     //             }
+                                //     //         }
+                                //     //     }
+                                //     // );
+
+
+                                //     // if (error) {
+                                //     //     console.log(error);
+                                //     //     Toast.danger(error.message)
+                                //     // } else {
+                                //     //     console.log(paymentMethod);
+                                //     //     // @this.processPayment(paymentMethod);
+                                //     // }
+                                // });
                             </script>
 
                         </div>

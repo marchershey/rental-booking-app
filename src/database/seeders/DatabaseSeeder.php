@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -26,5 +27,19 @@ class DatabaseSeeder extends Seeder
         $user->save();
 
         \App\Models\User::factory(10)->create();
+
+
+        // Settings
+        $settings = [
+            'company_name' => 'Serrate\'s Getaways',
+            'service_fee' => '15', // percentage
+            'cleaning_fee' => '35', // fixed rate
+        ];
+        foreach($settings as $key => $value){
+            Settings::create(['key' => $key, 'value' => $value]);
+        }
+
+
+
     }
 }
