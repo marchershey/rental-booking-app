@@ -1,0 +1,13 @@
+{
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+
+    // blade
+    "blade.format.enable": true,
+    "bladeFormatter.format.wrapLineLength": 9999,
+    "[blade]": {
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+    },
+    "headwind.prependCustomClasses": true,
+}

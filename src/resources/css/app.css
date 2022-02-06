@@ -1,0 +1,47 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+[x-cloak] {
+    display: none !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.splide__slide img {
+    opacity: 0.5;
+}
+
+.splide__slide.is-active img {
+    opacity: 1;
+}
+
+.splide__slide.is-active {
+    border: 0 !important;
+}
+
+@layer components {
+    .panel {
+        @apply p-5 overflow-hidden bg-white border border-gray-300 rounded-lg shadow-lg;
+    }
+    .label {
+        @apply inline-flex items-center px-2.5 py-0.5 text-xs rounded-full font-medium;
+    }
+    .label.muted {
+        @apply bg-muted-lightest;
+    }
+    .label.green {
+        @apply text-green-800 bg-green-100;
+    }
+    .label.red {
+        @apply text-red-800 bg-red-100;
+    }
+}

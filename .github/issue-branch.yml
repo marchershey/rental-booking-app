@@ -1,0 +1,3 @@
+branchName: '${issue.number}_${issue.title,}'
+mode: auto
+defaultBranch: 'main'
