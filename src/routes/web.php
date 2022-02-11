@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::name('frontend.')->group(function () {
     Route::view('/' , 'pages.frontend.welcome');
     Route::get('/property/{property_id}', \App\Http\Pages\Frontend\PropertyPage::class)->name('property')->whereNumber('id');
+    Route::get('/checkout/{reservation:slug}', \App\Http\Pages\Frontend\CheckoutPage::class)->name('checkout')->middleware('authfr');
 });
 
 
