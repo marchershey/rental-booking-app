@@ -189,7 +189,7 @@
                                         </li>
                                     </ul>
                                     <div class="rounded-md shadow">
-                                        <a href="{{ route('frontend.property', ['id' => $property->id]) }}" class="hover:bg-gray-900 flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-gray-800 border border-transparent rounded-md" aria-describedby="tier-standard"> View {{ $property->name }} </a>
+                                        <a href="{{ route('frontend.property', ['property_id' => $property->id]) }}" class="hover:bg-gray-900 flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-gray-800 border border-transparent rounded-md" aria-describedby="tier-standard"> View {{ $property->name }} </a>
                                     </div>
                                 </div>
                             </div>

@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         // create demo admin user
         $this->call([
-            DemoAdminUserSeeder::class,
+            AdminSeeder::class,
+            SettingsSeeder::class,
         ]);
 
         // create 10 users

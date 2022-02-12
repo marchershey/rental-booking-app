@@ -15,4 +15,9 @@ class Property extends Model
     {
         return $this->hasMany(Photo::class);
     }
+
+    public function fees()
+    {
+        return $this->hasMany(Fee::class);
+    }
 }

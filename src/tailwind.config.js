@@ -18,8 +18,8 @@ module.exports = {
                 primary: {
                     DEFAULT: colors.indigo[600],
                     lightest: colors.indigo[100],
-                    lighter: colors.indigo[200],
-                    light: colors.indigo[300],
+                    lighter: colors.indigo[300],
+                    light: colors.indigo[500],
                     dark: colors.indigo[700],
                     darker: colors.indigo[800],
                     darkest: colors.indigo[900],

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?{{ rand() }}">
     @livewireStyles
 
     <!-- Scripts -->
@@ -23,7 +23,7 @@
     </script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-gray-100">
     <livewire:toasts />
 
     <div class="fixed bottom-0 right-0 z-50 px-1 text-xs bg-white">
@@ -44,6 +44,12 @@
     @livewireScripts
     <!-- Page scripts -->
     @stack('scripts')
+
+    <script>
+        window.addEventListener('console', event => {
+            console.log(event.detail.message);
+        })
+    </script>
 </body>
 
 </html>

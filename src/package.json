@@ -26,6 +26,8 @@
     "dependencies": {
         "@googlemaps/js-api-loader": "^1.13.4",
         "@splidejs/splide": "^3.6.12",
-        "@tailwindcss/line-clamp": "^0.3.1"
+        "@tailwindcss/line-clamp": "^0.3.1",
+        "flatpickr": "^4.6.9",
+        "litepicker": "^2.0.12"
     }
 }

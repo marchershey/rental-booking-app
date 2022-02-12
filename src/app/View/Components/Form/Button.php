@@ -28,6 +28,9 @@ class Button extends Component
             case "red":
                 $this->buttonClass .= "bg-transparent text-red-500";
                 break;
+            case "link":
+                $this->buttonClass .= "bg-transparent text-primary";
+                break;
         }
     }
 

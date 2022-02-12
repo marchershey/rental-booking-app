@@ -28,13 +28,61 @@
                 <x-heading heading="Location" description="This address will be given to clients upon checkout" class="col-span-full" />
                 <x-form.text wire:ignore inputid="address_search" placeholder=" " label="Property Address" description="Start typing the property's address, then select the correct address from the dropdown" class="col-span-full" />
             </div>
-            {{-- Pricing --}}
+            {{-- Rates & Fees --}}
             <div class="panel space-y-3">
-                <x-heading heading="Pricing" description="Details about your property" class="col-span-full" />
-                <div class="lg:grid-cols-2 grid gap-4">
-                    <x-form.text wireid="rate" label="Rate" description="The rate is the cost per night excluding all other fees" />
+                <x-heading heading="Rates & Fees" description="Adjust the nightly rate and fees of your property" class="col-span-full" />
+                <div class="grid grid-cols-1 gap-5">
+                    <div class="gap-x-2 grid grid-cols-2">
+                        <x-form.text wireid="nightlyRate" label="Nightly Rate" description="Charge each guest ${{ number_format($nightlyRate ?? 0, 2) }} per night" />
+                        <x-form.text wireid="taxRate" label="Tax Percentage" description="Charge each guest {{ $taxRate ?? 0 }}% of the total cost" />
+                    </div>
+                    @if ($fees)
+                        <div class="flex flex-col space-y-5">
+                            {{-- <div class="bg-primary-lightest text-primary-darker sm:text-sm flex items-center p-3 space-x-2 text-xs rounded-md">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                        <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                                    </svg>
+                                </div>
+                                <p class="">
+                                    <strong>Please note:</strong> All percentage fees are applied only to the total nightly rate.
+                                </p>
+                            </div> --}}
+
+                            @foreach ($fees as $key => $value)
+                                <div class="flex space-x-2">
+                                    <x-form.text wireid="fees.{{ $key }}.name" inputid="fees_{{ $key }}_name" label="Name" class="w-full" placeholder="Cleaning fee" description="Charge each guest {{ $fees[$key]['type'] == 'fixed'? 'a flat fee of $' . ($fees[$key]['amount'] ?? 0): 'a ' . ($fees[$key]['amount'] ?? 0) . '% fee of the total nightly rate' }}" />
+                                    <label class="relative block">
+                                        <span class=" text-sm font-semibold capitalize">Amount</span>
+                                        <div class="relative mt-1">
+                                            <input wire:model.debounce.1s="fees.{{ $key }}.amount" id="fees_{{ $key }}_amount" type="text" class="focus:border-gray-500 focus:bg-white focus:ring-0 bg-muted-lightest placeholder-muted-light block w-full pr-16 mt-1 border-transparent rounded-md" placeholder="0.00">
+                                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                                <label class="sr-only">Currency</label>
+                                                <select wire:model="fees.{{ $key }}.type" id="fees_{{ $key }}_type" class="focus:outline-none focus:border-transparent focus:shadow-none focus:ring-0 pr-7 w-fit sm:text-sm h-full py-0 pl-2 text-xs text-right bg-transparent border-transparent rounded-md">
+                                                    <option value="fixed">Fixed</option>
+                                                    <option value="percent">%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <div class="mt-10">
+                                        <button wire:click.prevent="removeFee({{ $key }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="text-muted w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                     <div>
-                        <x-form.button class="lg:mt-7" color="muted">Add addition fees</x-form.button>
+                        <x-form.button class="" color="muted" wire:click.prevent="addFee()">Add addition fees</x-form.button>
                     </div>
                 </div>
             </div>
