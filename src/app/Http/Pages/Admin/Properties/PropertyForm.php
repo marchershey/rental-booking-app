@@ -85,6 +85,18 @@ class PropertyForm extends Component
             $this->dispatchBrowserEvent('address-updated', ['newAddress' => $this->address]);
             $this->nightlyRate = '379';
             $this->taxRate = '7';
+            $this->fees = [
+                [
+                    'name' => 'Cleaning fee',
+                    'amount' => '175',
+                    'type' => 'fixed'
+                ],
+                [
+                    'name' => 'Service fee',
+                    'amount' => '10',
+                    'type' => 'percent'
+                ],
+            ];
         }
     }
 

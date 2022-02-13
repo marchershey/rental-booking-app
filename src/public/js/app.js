@@ -8750,14 +8750,7 @@ window.google = google; // photo slider - splidejs
 
 
 
-window.Splide = _splidejs_splide__WEBPACK_IMPORTED_MODULE_2__["default"]; // flatpikr v4
-// import flatpickr from "flatpickr";
-// import "flatpickr/dist/flatpickr.min.css";
-// window.flatpickr = flatpickr;
-// global.rangePlugin = require("flatpickr/dist/plugins/rangePlugin");
-// calendar - lightpicker
-// window.disableLitepickerStyles = true;
-// import Litepicker from "litepicker/dist/nocss/litepicker.umd.js"; // no css
+window.Splide = _splidejs_splide__WEBPACK_IMPORTED_MODULE_2__["default"]; // calendar - lightpicker
 
 
 

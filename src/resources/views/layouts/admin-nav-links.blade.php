@@ -8,6 +8,29 @@
 
     <div class="sm:space-y-2 sm:text-sm space-y-1 text-gray-300" x-data="{open:false}" x-on:click.away="open = false">
         <button type="button" class="group sm:py-2 hover:bg-gray-700 hover:text-white flex items-center w-full px-2 py-3 rounded-lg {{ request()->is('admin/properties/*') ? 'bg-gray-900' : '' }}" x-on:click="open = !open">
+            <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white flex-shrink-0 w-6 h-6 mr-3 text-gray-400" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+            </svg>
+            <div class="group-hover:text-white flex items-center justify-between w-full">
+                <span>Guests</span>
+                <svg class="w-4 h-4" :class="{ 'text-gray-400 rotate-90': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </div>
+        </button>
+        <div x-show="open" x-cloak>
+            <a href="{{ route('admin.guests.view') }}" class="group pl-11 hover:text-white sm:py-2 hover:bg-gray-700 flex items-center w-full px-2 py-3 pr-2 rounded-lg {{ request()->is('admin/properties/all') ? 'text-white' : 'text-gray-400' }}">
+                View all guests
+            </a>
+        </div>
+    </div>
+
+    <div class="sm:space-y-2 sm:text-sm space-y-1 text-gray-300" x-data="{open:false}" x-on:click.away="open = false">
+        <button type="button" class="group sm:py-2 hover:bg-gray-700 hover:text-white flex items-center w-full px-2 py-3 rounded-lg {{ request()->is('admin/properties/*') ? 'bg-gray-900' : '' }}" x-on:click="open = !open">
             <svg class="group-hover:text-white flex-shrink-0 w-6 h-6 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
             </svg>

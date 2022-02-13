@@ -23,10 +23,10 @@
     </script>
 </head>
 
-<body class="font-sans antialiased bg-gray-100">
+<body class="font-sans antialiased bg-white">
     <livewire:toasts />
 
-    <div class="fixed bottom-0 right-0 z-50 px-1 text-xs bg-white">
+    <div class="fixed top-0 right-0 z-50 px-1 text-xs bg-white">
         <div class="sm:hidden">xs</div>
         <div class="sm:block md:hidden hidden">sm</div>
         <div class="md:block lg:hidden hidden">md</div>
@@ -36,10 +36,10 @@
     </div>
 
     <div class="min-h-screen bg-gray-100">
-
         {{ $slot }}
-
     </div>
+
+    @stack('outside')
 
     @livewireScripts
     <!-- Page scripts -->

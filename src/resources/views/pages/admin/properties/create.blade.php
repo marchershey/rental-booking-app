@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <x-slot name="headerTitle">
+    <x-slot name="pageTitle">
         Create a new property
     </x-slot>
 

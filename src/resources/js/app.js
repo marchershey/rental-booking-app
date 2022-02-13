@@ -19,14 +19,6 @@ import Splide from "@splidejs/splide";
 import splideCss from "@splidejs/splide/dist/css/themes/splide-default.min.css";
 window.Splide = Splide;
 
-// flatpikr v4
-// import flatpickr from "flatpickr";
-// import "flatpickr/dist/flatpickr.min.css";
-// window.flatpickr = flatpickr;
-// global.rangePlugin = require("flatpickr/dist/plugins/rangePlugin");
-
 // calendar - lightpicker
-// window.disableLitepickerStyles = true;
-// import Litepicker from "litepicker/dist/nocss/litepicker.umd.js"; // no css
 import Litepicker from "litepicker";
 import "litepicker/dist/plugins/mobilefriendly";

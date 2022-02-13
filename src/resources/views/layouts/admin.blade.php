@@ -60,19 +60,19 @@
             <main class="flex-1">
                 <div class="md:px-5 flex flex-col max-w-screen-lg px-3 py-5 mx-auto space-y-5">
 
-                    @if (isset($headerTitle) || isset($headerDesc))
+                    @if (isset($pageTitle) || isset($pageDesc))
                         <div class="flex items-center justify-between">
                             <div class="flex flex-col ml-1">
-                                @if (isset($headerTitle))
-                                    <h1 class="text-2xl font-bold capitalize">{{ $headerTitle }}</h1>
+                                @if (isset($pageTitle))
+                                    <h1 class="text-2xl font-bold capitalize">{{ $pageTitle }}</h1>
                                 @endif
-                                @if (isset($headerDesc))
-                                    <span class="text-muted text-sm">{{ $headerAction }}</span>
+                                @if (isset($pageDesc))
+                                    <span class="text-muted text-sm">{{ $pageDesc }}</span>
                                 @endif
                             </div>
-                            @if (isset($headerAction))
+                            @if (isset($pageAction))
                                 <div>
-                                    {{ $headerAction }}
+                                    {{ $pageAction }}
                                 </div>
                             @endif
                         </div>
@@ -80,16 +80,6 @@
                     <div>
                         {{ $slot }}
                     </div>
-
-                    {{-- <div class="sm:px-6 lg:px-8 flex items-center justify-between max-w-screen-md px-4">
-                        <h1 class="text-2xl font-semibold text-gray-900 capitalize">{{ $header }}</h1>
-                        <div>{{ $headerAction ?? null }}</div>
-                    </div>
-                    <div class="sm:px-6 md:px-8 max-w-screen-md px-4">
-                        <div class="py-5">
-                            {{ $slot }}
-                        </div>
-                    </div> --}}
                 </div>
             </main>
         </div>
